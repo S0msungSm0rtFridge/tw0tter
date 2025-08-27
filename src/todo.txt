@@ -1,0 +1,15 @@
+Add data
+import the data
+
+
+Add data to main profile page
+Add a top bar to the main profile page
+create the edit profile page
+create the following page
+create the lists of posts, replies, highlights, ect
+Search function
+
+Make home page
+Make Communities 
+
+

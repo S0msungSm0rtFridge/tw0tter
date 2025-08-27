@@ -1,8 +1,13 @@
+import "./Profile_page.css"
+import { useState } from "react";
+import data from "./twitterDummyData"
+
 export default function Profile_page(){
+
     return (
-        <div>
+        <div class="profile">
             <div>
-                <img src="https://pbs.twimg.com/profile_images/1960356490335641600/K4hYYe3T_400x400.png" alt="nono"></img>
+                <img src="https://pbs.twimg.com/profile_images/1960356490335641600/K4hYYe3T_400x400.png" alt="nono" class="img"></img>
                 <button>edit profile</button>
             </div>
             <div>
@@ -11,12 +16,15 @@ export default function Profile_page(){
                 <h5>Joined date</h5>
             </div>
             <div>
-                <button>Following</button>
-                <button>Followers</button>
+                <button onClick={() => change_window("Following")}>Following</button>
+                <button onClick={() => change_window("Followers")}>Followers</button>
             </div>
             <div>
                 <button>Posts</button>
                 <button>Replies</button>
+                <button>Highlights</button>
+                <button>Articles</button>
+                <button>Media</button>
                 <button>Likes</button>
             </div>
         </div>
