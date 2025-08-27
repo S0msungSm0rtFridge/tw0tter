@@ -21,19 +21,23 @@ function HomePage() {
 
 function leftNavBar(){
     return (
-        <ul className = "left-nav-bar-objects">
-            <li>Home</li>
-            <li>Explore</li>
-            <li>Notification</li>
-            <li>Messages</li>
-            <li>Bookmarks</li>
-            <li>Jobs</li>
-            <li>Communities</li>
-            <li>Premium</li>
-            <li>Verified Orgs</li>
-            <li>Profile</li>
-            <li>More</li>
-        </ul>
+        <div>
+            <div className = "'logo"> Add Logo Here </div>
+            <ul className = "left-nav-bar-objects">
+                <li>Home</li>
+                <li>Explore</li>
+                <li>Notification</li>
+                <li>Messages</li>
+                <li>Bookmarks</li>
+                <li>Jobs</li>
+                <li>Communities</li>
+                <li>Premium</li>
+                <li>Verified Orgs</li>
+                <li>Profile</li>
+                <li>More</li>
+            </ul>
+        </div>
+
     )
 }
 
@@ -58,6 +62,10 @@ function rightNavBar(){
 function mainContent(){
     return (
         <div className = "main-content-items">
+            <div className = "cain-content--nav -bar">
+                <button>For You</button>
+                <button>Following</button>
+            </div>
             <div className = "post-creation-area">
                 <textarea placeholder = "What's happening?"></textarea>
                 {/*add biuttons to add photos, links giffs and shit */}
