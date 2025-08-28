@@ -1,0 +1,15 @@
+Make Dummy data (done)
+Make home page
+Make post page with comments
+Make Communities with posts
+Make Create new Post page
+Make Create new Comment page
+Add Search function for posts
+login page
+Make profile page with top bar
+create the edit profile page
+create the following page
+create the lists of posts, replies, highlights, ect
+
+
+
