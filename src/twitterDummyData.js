@@ -106,3 +106,5 @@ const twitterDummyData = {
     },
   ],
 };
+
+export { twitterDummyData }
