@@ -1,4 +1,5 @@
 import './Mainpage.css';
+import twitterDummyData from "./twitterDummyData"
 
 function HomePage() {
     return (
@@ -30,7 +31,7 @@ function leftNavBar(){
                 <li>Messages</li>
                 <li>Bookmarks</li>
                 <li>Jobs</li>
-                <li>Communities</li>
+                <li onClick = { () => console.log("this was pressed")}>Communities</li>
                 <li>Premium</li>
                 <li>Verified Orgs</li>
                 <li>Profile</li>
@@ -72,7 +73,28 @@ function mainContent(){
                 <button>Post</button>
             </div>
             <div className = "content-area">
-                {/* need to add post to this area*/}
+                <div>{twitterDummyData.posts.map((post) => postBox(post))}</div>
+            </div>
+        </div>
+    )
+}
+
+
+function postBox(post){
+    return (
+        <div className = "post-box">
+            <div className = "post-meta-data">
+                <div className = "post-user-name">{post.postedBy}</div>
+                <div className = "post-date">{post.postedDate}</div>
+            </div>
+            <div className = "main-post-content">{post.content}</div>
+            <div className = "main-post-footer">
+                <button>reply</button>
+                <button>retweet</button>
+                <button>like</button>
+                <button>views</button>
+                <button>bookmark</button>
+                <button>share</button>
             </div>
         </div>
     )

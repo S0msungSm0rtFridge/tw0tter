@@ -19,8 +19,8 @@ export default function Profile_page(){
                 <h5>Joined date</h5>
             </div>
             <div>
-                <button onClick={() => change_window("Following")}>Following</button>
-                <button onClick={() => change_window("Followers")}>Followers</button>
+                <button>Following</button>
+                <button>Followers</button>
             </div>
             <div>
                 <button>Posts</button>

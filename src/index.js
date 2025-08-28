@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Profile_page from './Profile_page';
 import reportWebVitals from './reportWebVitals';
-import  HomePage from './Mainpage.js';
+import HomePage from './Mainpage.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Profile_page />
+    <HomePage />
   </React.StrictMode>
 );
 
