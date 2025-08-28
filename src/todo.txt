@@ -12,4 +12,10 @@ create the following page
 create the lists of posts, replies, highlights, ect
 
 
-
+Nelson side
+1. make page views i.e wat community view looks like, what a post page would look like
+2.add posting functionality
+3. add following functionality
+4. add backend now
+5. got back and add functionallity to buttons like what replying does, what retweeting does, what liking does
+6.go back and add mote pages and what they do, focus on first 5
