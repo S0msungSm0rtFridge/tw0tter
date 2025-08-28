@@ -107,4 +107,4 @@ const twitterDummyData = {
   ],
 };
 
-export { twitterDummyData }
+export default twitterDummyData;

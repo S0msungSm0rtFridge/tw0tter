@@ -1,4 +1,5 @@
 import './Mainpage.css';
+import twitterDummyData from "./twitterDummyData"
 
 function HomePage() {
     return (
@@ -21,19 +22,23 @@ function HomePage() {
 
 function leftNavBar(){
     return (
-        <ul className = "left-nav-bar-objects">
-            <li>Home</li>
-            <li>Explore</li>
-            <li>Notification</li>
-            <li>Messages</li>
-            <li>Bookmarks</li>
-            <li>Jobs</li>
-            <li>Communities</li>
-            <li>Premium</li>
-            <li>Verified Orgs</li>
-            <li>Profile</li>
-            <li>More</li>
-        </ul>
+        <div>
+            <div className = "'logo"> Add Logo Here </div>
+            <ul className = "left-nav-bar-objects">
+                <li>Home</li>
+                <li>Explore</li>
+                <li>Notification</li>
+                <li>Messages</li>
+                <li>Bookmarks</li>
+                <li>Jobs</li>
+                <li onClick = { () => console.log("this was pressed")}>Communities</li>
+                <li>Premium</li>
+                <li>Verified Orgs</li>
+                <li>Profile</li>
+                <li>More</li>
+            </ul>
+        </div>
+
     )
 }
 
@@ -58,13 +63,38 @@ function rightNavBar(){
 function mainContent(){
     return (
         <div className = "main-content-items">
+            <div className = "cain-content--nav -bar">
+                <button>For You</button>
+                <button>Following</button>
+            </div>
             <div className = "post-creation-area">
                 <textarea placeholder = "What's happening?"></textarea>
                 {/*add biuttons to add photos, links giffs and shit */}
                 <button>Post</button>
             </div>
             <div className = "content-area">
-                {/* need to add post to this area*/}
+                <div>{twitterDummyData.posts.map((post) => postBox(post))}</div>
+            </div>
+        </div>
+    )
+}
+
+
+function postBox(post){
+    return (
+        <div className = "post-box">
+            <div className = "post-meta-data">
+                <div className = "post-user-name">{post.postedBy}</div>
+                <div className = "post-date">{post.postedDate}</div>
+            </div>
+            <div className = "main-post-content">{post.content}</div>
+            <div className = "main-post-footer">
+                <button>reply</button>
+                <button>retweet</button>
+                <button>like</button>
+                <button>views</button>
+                <button>bookmark</button>
+                <button>share</button>
             </div>
         </div>
     )
