@@ -1,4 +1,4 @@
-import { twitterDummyData }  from "./twitterDummyData";
+import { twitterDummyData }  from "../twitterDummyData";
 import React, { use, useState } from "react";
 
 function SignIn({ goBack }){

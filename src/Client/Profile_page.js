@@ -1,5 +1,5 @@
 import "./Profile_page.css"
-import data from "./twitterDummyData"
+import data from "../twitterDummyData"
 
 export default function ProfilePage(){
 

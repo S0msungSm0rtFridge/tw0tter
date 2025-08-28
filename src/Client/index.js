@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {ProfilePage, FollowPage, EditProfile} from './Profile_page';
-import {LoginPage} from "./login"
-import reportWebVitals from './reportWebVitals';
+import {ProfilePage, FollowPage, EditProfile} from './Profile_page.js';
+import {LoginPage} from "./login.js"
+import reportWebVitals from './reportWebVitals.js';
 import HomePage from './Mainpage.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
