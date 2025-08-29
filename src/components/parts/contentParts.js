@@ -1,9 +1,10 @@
 import './contentParts.css';
 import twitterDummyData from '../../twitterDummyData';
 import { postBox } from '../smallPieces/postBox';
-
+import { PostPage } from '../pages/Postpage';
 
 function mainContent(){
+
     return (
         <div className = "main-content-items">
             <div className = "cain-content--nav -bar">

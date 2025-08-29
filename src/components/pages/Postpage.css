@@ -1,0 +1,117 @@
+/* Container for the full post page */
+.post-page-view {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  border-bottom: 1px solid #e1e8ed;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+}
+
+/* Post header */
+.post-header-metadata {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.post-user-profile-picture {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #ccc; /* placeholder */
+  margin-right: 10px;
+}
+
+.post-username {
+  font-weight: bold;
+  font-size: 16px;
+  color: #0f1419;
+}
+
+/* Post content */
+.post-content {
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  color: #0f1419;
+}
+
+/* Post footer metadata (date + views) */
+.post-footer-metadata {
+  display: flex;
+  justify-content: space-between;
+  color: #536471;
+  font-size: 14px;
+  border-bottom: 1px solid #e1e8ed;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+/* Action buttons (reply, retweet, like, etc.) */
+.post-button-options {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 12px;
+}
+
+.post-button-options button {
+  background: none;
+  border: none;
+  color: #536471;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 25px;
+  transition: background 0.2s;
+}
+
+.post-button-options button:hover {
+  background-color: #f0f2f5;
+  color: #1d9bf0;
+}
+
+/* Reply box */
+.post-reply-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border-top: 1px solid #e1e8ed;
+  padding-top: 12px;
+  margin-bottom: 20px;
+}
+
+.post-footer-reply-option {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: #f0f2f5;
+}
+
+.post-reply-button {
+  background-color: #1d9bf0;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: center;
+  transition: background 0.2s;
+}
+
+.post-reply-button:hover {
+  background-color: #1a8cd8;
+}
+
+/* Replies section placeholder */
+.post-reply-section {
+  border-top: 1px solid #e1e8ed;
+  padding-top: 12px;
+  color: #536471;
+  font-size: 14px;
+}
