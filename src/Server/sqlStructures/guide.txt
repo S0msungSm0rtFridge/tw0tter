@@ -1,0 +1,10 @@
+mysql -u root -p
+SELECT CURRENT_USER();
+SHOW DATABASES;
+USE "name of database";
+exit;
+
+run the sql files in the order
+users -> communities -> posts -> replies
+
+mysql -u your_username -p your_database_name < users.sql
