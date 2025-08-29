@@ -1,0 +1,80 @@
+/* Container */
+.small-user-side-profile-container {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #e1e8ed;
+  padding: 12px 16px;
+  background-color: #fff;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.small-user-side-profile-container:hover {
+  background-color: #f7f9f9;
+}
+
+/* Header row (pic + info + button) */
+.small-user-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Profile picture */
+.small-user-profile-profile-picture {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #ccc; /* placeholder */
+  flex-shrink: 0;
+}
+
+/* Name + tag container */
+.small-user-profile-name,
+.small-user-profile-tage {
+  margin-left: 12px;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.small-user-profile-name {
+  font-weight: 600;
+  color: #0f1419;
+}
+
+.small-user-profile-tage {
+  font-weight: 400;
+  color: #536471;
+}
+
+/* Push name/tag to the left side next to picture */
+.small-user-profile-name,
+.small-user-profile-tage {
+  display: block;
+}
+
+/* Follow/Following button */
+.small-user-profile-following-button {
+  margin-left: auto;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid #536471;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f1419;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.small-user-profile-following-button:hover {
+  background-color: #f7f9f9;
+}
+
+/* Bio below */
+.small-user-profile-bio {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #0f1419;
+  line-height: 1.4;
+}

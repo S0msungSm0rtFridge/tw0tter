@@ -2,7 +2,7 @@ import twitterDummyData from "../../twitterDummyData"
 import './Postpage.css';
 
 
-function PostPage(post){
+function PostPage({post}){
     return (
         <div className = "post-page-view">
             <div className = "post-header-metadata">

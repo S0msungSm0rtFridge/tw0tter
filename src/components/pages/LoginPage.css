@@ -1,0 +1,113 @@
+/* Full page container */
+.login-page-main-container {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+}
+
+/* Left side (logo) */
+.login-page-left-side-logo {
+  flex: 1;
+  background-color: #1d9bf0; /* Twitter blue background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page-left-side-logo::before {
+  content: "🐦"; /* Placeholder for Twitter logo, swap with SVG later */
+  font-size: 150px;
+  color: white;
+}
+
+/* Right side (content) */
+.login-page-right-side-content {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-page-main-header {
+  font-size: 64px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #0f1419;
+}
+
+.login-page-sub-header {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #0f1419;
+}
+
+/* Signup options */
+.login-page-signup-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 300px;
+  margin-bottom: 24px;
+}
+
+.login-page-signup-options button {
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 1px solid #cfd9de;
+  background: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s;
+}
+
+.login-page-signup-options button:hover {
+  background-color: #f7f9f9;
+}
+
+/* Special styles for main sign-up button */
+.login-page-signup-with-us {
+  background-color: #1d9bf0;
+  color: white;
+  border: none;
+}
+
+.login-page-signup-with-us:hover {
+  background-color: #1a8cd8;
+}
+
+/* Divider */
+.login-page-divider {
+  display: block;
+  height: 1px;
+  background: #cfd9de;
+  margin: 16px 0;
+}
+
+/* Login options */
+.login-page-login-options {
+  margin-top: 20px;
+  max-width: 300px;
+}
+
+.login-page-login-header {
+  font-size: 17px;
+  margin-bottom: 12px;
+  color: #0f1419;
+}
+
+.login-page-login-with-us {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 1px solid #cfd9de;
+  background: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.login-page-login-with-us:hover {
+  background-color: #f7f9f9;
+}

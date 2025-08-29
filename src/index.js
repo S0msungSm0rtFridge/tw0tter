@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Profile_page from './Profile_page';
 import reportWebVitals from './reportWebVitals';
-import MainPage from './components/pages/Mainpage.js';
+import HomePage from './components/pages/Mainpage.js';
+import { LoginPage } from './components/pages/Loginpage.js';
+import { EditProfilePage } from './components/parts/EditProfile.js';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <MainPage />
+    <HomePage />
   </React.StrictMode>
 );
 

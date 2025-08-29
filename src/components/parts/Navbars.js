@@ -1,5 +1,9 @@
 import './Navbars.css';
-function leftNavBar(setWindowState){
+import { CreatePost } from './CreatePost';
+import { useState } from 'react';
+
+function LeftNavBar(setWindowState){
+    const [CreatingPost, setCreatingPost] = useState(false);
     return (
         <div>
             <div className = "'logo"> Add Logo Here </div>
@@ -13,15 +17,18 @@ function leftNavBar(setWindowState){
                 <li onClick = { () => setWindowState(["commuinity", null])}>Communities</li>
                 <li>Premium</li>
                 <li>Verified Orgs</li>
-                <li>Profile</li>
+                <li onClick = { () => setWindowState(["profile", null])}>Profile</li>
                 <li>More</li>
             </ul>
+            <button className = "left-nav-bar-post-button" onClick = { () => setCreatingPost(true)}>Post</button>
+
+            {CreatingPost && <CreatePost setCreatingPost={setCreatingPost}/>}
         </div>
 
     )
 }
 
-function rightNavBar(){
+function RightNavBar(){
     return (
         <div className = "right-nav-bar-objects">
             <input type = "text" placeholder = "Search Tw0tter"></input>
@@ -40,4 +47,4 @@ function rightNavBar(){
 }
 
 
-export { leftNavBar, rightNavBar }
+export { LeftNavBar, RightNavBar }
