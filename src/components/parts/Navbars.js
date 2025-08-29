@@ -1,16 +1,16 @@
 import './Navbars.css';
-function leftNavBar(){
+function leftNavBar(setWindowState){
     return (
         <div>
             <div className = "'logo"> Add Logo Here </div>
             <ul className = "left-nav-bar-objects">
-                <li>Home</li>
+                <li onClick = { () => setWindowState(["home", null])}>Home</li>
                 <li>Explore</li>
                 <li>Notification</li>
                 <li>Messages</li>
                 <li>Bookmarks</li>
                 <li>Jobs</li>
-                <li onClick = { () => console.log("this was pressed")}>Communities</li>
+                <li onClick = { () => setWindowState(["commuinity", null])}>Communities</li>
                 <li>Premium</li>
                 <li>Verified Orgs</li>
                 <li>Profile</li>

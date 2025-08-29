@@ -3,7 +3,7 @@ import twitterDummyData from '../../twitterDummyData';
 import { postBox } from '../smallPieces/postBox';
 import { PostPage } from '../pages/Postpage';
 
-function mainContent(){
+function MainContent({setState}){
 
     return (
         <div className = "main-content-items">
@@ -17,10 +17,10 @@ function mainContent(){
                 <button>Post</button>
             </div>
             <div className = "content-area" onClick = { () => console.log("pressed a post")}>
-                <div>{twitterDummyData.posts.map((post) => postBox(post))}</div>
+                <div>{twitterDummyData.posts.map((post) => postBox(post, setState))}</div>
             </div>
         </div>
     )
 }
 
-export {mainContent}
+export {MainContent}

@@ -1,8 +1,8 @@
 import './postbox.css';
 
-function postBox(post){
+function postBox(post, setState){
     return (
-        <div className = "post-box" onClick = { () => console.log("postBox was pressed")}>
+        <div className = "post-box" onClick = { () => setState(["post", post.postID])}>
             <div className = "post-meta-data">
                 <div className = "post-user-name">{post.postedBy}</div>
                 <div className = "post-date">{post.postedDate}</div>
