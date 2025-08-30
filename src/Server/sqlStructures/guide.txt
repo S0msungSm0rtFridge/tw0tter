@@ -4,7 +4,15 @@ SHOW DATABASES;
 USE "name of database";
 exit;
 
+when making database
+host is localhost
+user should be root
+password is password
+database name is tw0tter
+(This is the credentials I used to create the connection with the database)
+
 run the sql files in the order
-users -> communities -> posts -> replies
+users -> communities -> posts -> replies -> dummy-data
 
 mysql -u your_username -p your_database_name < users.sql
+

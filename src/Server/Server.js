@@ -20,7 +20,7 @@ app.use('/api/communities', require("./routes/communities.js"));
 app.use('/api/posts', require('./routes/posts.js'));
 app.use('/api/replies', require('./routes/replies.js'));
 
-module.exports = { database, app }; //export database and app
+module.exports = database; //export database and app
 
 app.listen(3000, () => {
     console.log("Server runnning on http://localhost:3000");
