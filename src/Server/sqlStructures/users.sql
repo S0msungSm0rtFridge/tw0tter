@@ -11,7 +11,7 @@ CREATE TABLE users (
 CREATE TABLE follows(
     followerID INT NOT NULL,
     followingID INT NOT NULL,
-    PRIMARY KEY (followerID, followingID),
+    PRIMARY KEY (followerID, followingID), --followerID follows followingID
     FOREIGN KEY (followerID) REFERENCES users(userID),
     FOREIGN KEY (followingID) REFERENCES users(userID)
 );
