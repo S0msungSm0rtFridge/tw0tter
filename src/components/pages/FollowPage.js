@@ -11,7 +11,7 @@ function FollowingPage({setWindowState}){
                     <div className = "following-page-your-account-tag">ACC tag WILL ADD WITH DB</div>
                 </div>
                 <div className = "following-page-options">
-                    <button className = "following-page-following">Following</button>
+                    <button onClick = { () => setWindowState(["following", null])}className = "following-page-following">Following</button>
                     <button className = "following-page-followers">Followers</button>
                 </div>
                 <div className = "following-page-user-profiles">

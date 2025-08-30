@@ -1,5 +1,5 @@
 import './Navbars.css';
-import { CreatePost } from './CreatePost';
+import { CreatePost } from '../features/CreatePost';
 import { useState } from 'react';
 
 function LeftNavBar(setWindowState){

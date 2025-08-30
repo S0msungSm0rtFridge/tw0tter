@@ -1,7 +1,7 @@
 import './contentParts.css';
-import twitterDummyData from '../../twitterDummyData';
-import { postBox } from '../smallPieces/postBox';
-import { PostPage } from '../pages/Postpage';
+import twitterDummyData from '../../../twitterDummyData';
+import { postBox } from '../../smallPieces/postBox';
+import { PostPage } from '../../pages/Postpage';
 
 function MainContent({setState}){
 
