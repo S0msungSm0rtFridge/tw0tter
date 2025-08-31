@@ -10,7 +10,7 @@ import { EditProfilePage } from './components/parts/EditProfile.js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <HomePage />
+    <LoginPage />
   </React.StrictMode>
 );
 
