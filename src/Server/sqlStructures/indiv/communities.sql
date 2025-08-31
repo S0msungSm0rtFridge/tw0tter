@@ -3,6 +3,7 @@ CREATE TABLE communities(
     objectTag VARCHAR(1),
     `name` VARCHAR(50) NOT NULL,
     `description` TEXT, 
+    numMember INT DEFAULT 0,
     created DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
