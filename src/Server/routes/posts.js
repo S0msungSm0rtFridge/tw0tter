@@ -11,7 +11,7 @@ router.get('/', (req, resp) => { //grab all posts
     });
 });
 
-router.get('/getRetweets/:postID', (req, resp) => { //get all userids who retweeted a post
+router.get('/getWhoRetweet/:postID', (req, resp) => { //get all userids who retweeted a post
     const postID = req.params.postID;
     database.query('SELECT userID FROM retweets WHERE postID = ? ', [postID],(err, res) => {
         if (err){
