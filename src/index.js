@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import {ProfilePage, FollowPage, EditProfile} from './Profile_page.js';
-import {LoginPage} from "./login.js"
-import reportWebVitals from './reportWebVitals.js';
-import HomePage from './Mainpage.js';
+import './Client/Style Sheets/index.css';
+import {ProfilePage, FollowPage, EditProfile} from './Client/Components/Profile_page.js';
+import {LoginPage} from "./Client/Components/login.js"
+import reportWebVitals from './Client/reportWebVitals.js';
+import HomePage from './Client/Components/Mainpage.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <LoginPage />
+    <ProfilePage />
   </React.StrictMode>
 );
 

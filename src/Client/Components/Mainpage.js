@@ -1,5 +1,6 @@
-import './Mainpage.css';
-import twitterDummyData from "../twitterDummyData"
+// import './Mainpage.css';
+// import twitterDummyData from "../twitterDummyData";
+import '../Style Sheets/Mainpage.css';
 
 function HomePage() {
     return (
