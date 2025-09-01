@@ -1,5 +1,7 @@
 // import './Mainpage.css';
 // import twitterDummyData from "../twitterDummyData";
+import { getPosts } from './asyncHelpers';
+import { useEffect, useState } from 'react';
 import '../Style Sheets/Mainpage.css';
 
 function HomePage() {
@@ -64,7 +66,7 @@ function rightNavBar(){
 function mainContent(){
     return (
         <div className = "main-content-items">
-            <div className = "cain-content--nav -bar">
+            <div className = "cain-content--nav--bar">
                 <button>For You</button>
                 <button>Following</button>
             </div>
@@ -74,19 +76,32 @@ function mainContent(){
                 <button>Post</button>
             </div>
             <div className = "content-area">
-                <div>{twitterDummyData.posts.map((post) => postBox(post))}</div>
+                <div><PostListing/></div>
             </div>
         </div>
     )
 }
 
+function PostListing(){
+    const [posts, setPosts] = useState([]);
 
-function postBox(post){
+    useEffect(() => {
+        getPosts().then(data => setPosts(data)).catch(error => console.error(error));
+    }, []);
+
+    return (
+        <div>
+            {posts.map(post => {<ul><PostBox post = {post}/></ul>})}
+        </div>
+    );
+}  
+
+function PostBox(post){
     return (
         <div className = "post-box">
             <div className = "post-meta-data">
-                <div className = "post-user-name">{post.postedBy}</div>
-                <div className = "post-date">{post.postedDate}</div>
+                <div className = "post-user-name">{post.postBy}</div>
+                <div className = "post-date">{post.postDate}</div>
             </div>
             <div className = "main-post-content">{post.content}</div>
             <div className = "main-post-footer">
