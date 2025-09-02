@@ -1,7 +1,7 @@
 import { postBox } from './postBox';
 import { PostPage } from '../../pages/Postpage';
 
-function MainContent({setState}){
+function MainContent({setWindowState}){
 
     return (
         <div className = "main-content-items">

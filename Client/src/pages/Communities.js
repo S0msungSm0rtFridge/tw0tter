@@ -1,7 +1,7 @@
 import { postBox } from "../components/ui/postBox.js"
 import '../StyleSheets/Communities.css';
 
-function Communities({setState}){
+function Communities({setWindowState}){
     return (
         <div className = "Communities-main-page">
             <textarea className = "Communities-page-search-bar"></textarea>

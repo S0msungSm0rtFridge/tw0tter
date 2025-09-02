@@ -2,7 +2,7 @@ import '../../StyleSheets/Navbars.css';
 import { CreatePost } from '../features/CreatePost';
 import { useState } from 'react';
 
-function LeftNavBar(setWindowState){
+function LeftNavBar({setWindowState}){
     const [CreatingPost, setCreatingPost] = useState(false);
     return (
         <div>
