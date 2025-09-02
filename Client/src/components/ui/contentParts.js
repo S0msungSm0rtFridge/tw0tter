@@ -1,6 +1,7 @@
 import { postBox } from './postBox';
 import { PostPage } from '../../pages/Postpage';
 
+
 function MainContent({setWindowState}){
 
     return (
@@ -15,7 +16,7 @@ function MainContent({setWindowState}){
                 <button>Post</button>
             </div>
             <div className = "content-area" onClick = { () => console.log("pressed a post")}>
-                <div>{/*twitterDummyData.posts.map((post) => postBox(post, setState))*/}</div>
+                <div><PostPage /></div>
             </div>
         </div>
     )
