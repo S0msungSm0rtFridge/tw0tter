@@ -51,4 +51,12 @@ router.get('/getNumRetweet/:postID', (req, resp) => { //get number of retweets o
     });
 });
 
+router.post('/addPost/:postBy/:communityID/:content', (req, resp) => {
+    const postBy = req.params.postBy;
+    const communityID = req.params.communityID;
+    const content = req.params.content;
+
+    database.query('INSERT into posts')
+});
+
 module.exports = router;
