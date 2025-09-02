@@ -1,8 +1,6 @@
 Matt side
-1. Finish writing up the routes and async helpers (mainly get requests first)
-2. Fix all the fucking issues with react after moving files
-3. Begin using the api routes to ask for data and displaying it (probably start with home page) 
-4. If all works above. Redo the last 3 steps for post requests. 
+1. Work on add post Feature
+2. Work on Search Feature
 
 
 
