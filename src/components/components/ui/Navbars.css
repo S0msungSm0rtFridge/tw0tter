@@ -1,0 +1,97 @@
+
+/* Left Nav */
+.left-nav-Bar {
+  border-right: 1px solid #e1e8ed;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.left-nav-Bar .logo {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.left-nav-bar-objects {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.left-nav-bar-objects li {
+  padding: 12px 0;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 25px;
+  padding-left: 10px;
+  transition: background 0.2s;
+}
+
+.left-nav-bar-objects li:hover {
+  background-color: #e8f5fe;
+  color: #1d9bf0;
+}
+
+/* Right Nav */
+.right-nav-bar {
+  padding: 20px;
+}
+
+.right-nav-bar-objects {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-nav-bar-objects input[type="text"] {
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: none;
+  background-color: #f0f2f5;
+  font-size: 15px;
+  outline: none;
+}
+
+.shameless-plug {
+  padding: 10px 20px;
+  background-color: #1d9bf0;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.shameless-plug:hover {
+  background-color: #1a8cd8;
+}
+
+.trending-section {
+  background: #f7f9f9;
+  border-radius: 16px;
+  padding: 15px;
+}
+
+.trending-section h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.trending-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.trending-list li {
+  padding: 8px 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.trending-list li:hover {
+  background-color: #e8f5fe;
+}
