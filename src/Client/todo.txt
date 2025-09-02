@@ -1,6 +1,7 @@
 Matt side
-1. Work on add post Feature
-2. Work on Search Feature
+1. Work on the way time looks
+2. Work on add post Feature
+3. Work on Search Feature
 
 
 

@@ -105,23 +105,27 @@ function PostListing(){
 function PostBox({post, users}){
     
     const user = users.find(user => user.userID === post.postBy);
-    console.log(user);
+    if (!user) return null;
     return (
-        <div className = "post-box">
-            <div className = "post-meta-data">
-                <div className = "post-user-name">{user.username}</div>
-                <div className = "post-date">{post.postDate}</div>
-            </div>
-            <div className = "main-post-content">{post.content}</div>
-            <div className = "main-post-footer">
-                <button>reply</button>
-                <button>retweet</button>
-                <button>like</button>
-                <button>views</button>
-                <button>bookmark</button>
-                <button>share</button>
+        <div className="post-box">
+            <img className="post-avatar" src={user.avatar} alt={user.username} />
+            <div style={{flex: 1}}>
+                <div className="post-user-info">
+                    <span className="post-user-name">{user.displayName}</span>
+                    <span className="post-user-handle">@{user.username}</span>
+                    <span className="post-date">· {post.postDate}</span>
+                </div>
+                <div className="main-post-content">{post.content}</div>
+                <div className="main-post-footer">
+                    <button title="Reply">💬</button>
+                    <button title="Retweet">🔁</button>
+                    <button title="Like">❤️</button>
+                    <button title="Views">👁️</button>
+                    <button title="Bookmark">🔖</button>
+                    <button title="Share">↗️</button>
+                </div>
             </div>
         </div>
-    )
+    );
 }
 export default HomePage;
