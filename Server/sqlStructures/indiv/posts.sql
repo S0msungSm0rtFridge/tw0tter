@@ -1,6 +1,8 @@
 CREATE TABLE posts (
     postID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     objectTag VARCHAR(1) NOT NULL, 
+    numLikes INT DEFAULT 0,
+    numRetweet INT DEFAULT 0,
     postBy INT NOT NULL,
     communityID INT NOT NULL,
     content TEXT,
