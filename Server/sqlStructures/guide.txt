@@ -1,8 +1,11 @@
 mysql -u root -p
 SELECT CURRENT_USER();
 SHOW DATABASES;
+CREATE DATABASE tw0tter; (if not there)
 USE "name of database";
 exit;
+
+mysql -u your_username -p your_database_name < .Total.sql
 
 when making database
 host is localhost
@@ -11,8 +14,5 @@ password is password
 database name is tw0tter
 (This is the credentials I used to create the connection with the database)
 
-run the sql files in the order
-users -> communities -> posts -> replies -> dummy-data
 
-mysql -u your_username -p your_database_name < users.sql
 
