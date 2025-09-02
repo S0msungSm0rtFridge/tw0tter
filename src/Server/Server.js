@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mysql2 = require("mysql2");
-const database = require("./db.js");
+const database = require("../../Server/db.js");
 
 const app = express(); //create express framework
 app.use(cors()); //use cors to link front-end

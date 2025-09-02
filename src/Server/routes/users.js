@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const database = require("../db.js");
+const database = require("../../../Server/db.js");
 
 router.get('/', (req, resp) => { //grab all users
     database.query('SELECT * FROM users', (err, res) => {

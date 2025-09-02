@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const database = require("../db.js");
+const database = require("../../../Server/db.js");
 
 router.get('/', (req, resp) => { //grab all posts
     database.query('SELECT * FROM posts', (err, res) => {
@@ -56,7 +56,7 @@ router.post('/addPost/:postBy/:communityID/:content', (req, resp) => {
     const communityID = req.params.communityID;
     const content = req.params.content;
 
-    database.query('INSERT into posts')
+    database.query('INSERT into posts ()')
 });
 
 module.exports = router;
