@@ -1,6 +1,6 @@
 // import './Mainpage.css';
 // import twitterDummyData from "../twitterDummyData";
-import { getPosts } from './asyncHelpers';
+import { getPosts, getUsers } from './asyncHelpers';
 import { useEffect, useState } from 'react';
 import '../Style Sheets/Mainpage.css';
 
@@ -84,23 +84,30 @@ function mainContent(){
 
 function PostListing(){
     const [posts, setPosts] = useState([]);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         getPosts().then(data => setPosts(data)).catch(error => console.error(error));
+        getUsers().then(data => setUsers(data)).catch(error => console.error(error));
     }, []);
+
+    // console.log(posts);
 
     return (
         <div>
-            {posts.map(post => {<ul><PostBox post = {post}/></ul>})}
+            {posts.map(post => {console.log(post); return <ul key={post.postID}><PostBox post = {post} users = {users}/></ul>})}
         </div>
     );
 }  
 
-function PostBox(post){
+function PostBox({post, users}){
+    
+    const user = users.find(user => user.userID === post.postBy);
+    console.log(user);
     return (
         <div className = "post-box">
             <div className = "post-meta-data">
-                <div className = "post-user-name">{post.postBy}</div>
+                <div className = "post-user-name">{user.username}</div>
                 <div className = "post-date">{post.postDate}</div>
             </div>
             <div className = "main-post-content">{post.content}</div>

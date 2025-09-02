@@ -58,6 +58,8 @@ async function getMembers(communityID){
 async function getPosts(){
     try {
         const resp = await axios.get("api/posts");
+        console.log("after");
+        // console.log(resp.data);
         return resp.data;
     }
     catch (error){
