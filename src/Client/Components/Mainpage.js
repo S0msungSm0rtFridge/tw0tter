@@ -95,7 +95,9 @@ function PostListing(){
 
     return (
         <div>
-            {posts.map(post => {console.log(post); return <ul key={post.postID}><PostBox post = {post} users = {users}/></ul>})}
+            { (posts.length > 0 && users.length > 0) ? 
+            posts.map(post => {return <ul key={post.postID}><PostBox post = {post} users = {users}/></ul>}) :
+            <div>Loading...</div>}
         </div>
     );
 }  
