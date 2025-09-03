@@ -1,5 +1,7 @@
 import '../../StyleSheets/LoginPage.css';
 
+
+//basic login page, lacks any auth and is not funvctional current;ly
 function LoginPage(){
 
     return (

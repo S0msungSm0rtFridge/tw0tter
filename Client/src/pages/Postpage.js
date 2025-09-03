@@ -2,6 +2,8 @@ import '../StyleSheets/Postpage.css';
 import { useState, useEffect } from 'react';
 import { getPosts, getUsers } from '../asyncHelpers';
 
+
+//the page that shows up when you click on a post
 function PostPage(){
     const [posts, setPost] = useState([]);
     const [users, setUser] = useState([]);

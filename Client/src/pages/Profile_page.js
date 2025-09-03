@@ -1,6 +1,9 @@
 import "../StyleSheets/Profile_page.css"
 import { useState } from "react";
 import { EditProfilePage } from "../components/features/EditProfile";
+
+//if the profile page is being viewed
+//will set editing as a state
 function Profile_page({setWindowState}){
 
     const [isEditing, setisEditing] = useState(false);

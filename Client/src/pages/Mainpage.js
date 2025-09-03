@@ -10,7 +10,6 @@ import { FollowingPage } from './FollowPage.js';
 
 function HomePage() {
     const [windowState, setWindowState] = useState(["home", null]);
-    console.log(setWindowState);
     const windowHandler = () => {
         if(windowState[0] === "home"){
             return <MainContent setState = {setWindowState}/>
@@ -19,7 +18,8 @@ function HomePage() {
             return <Communities setState = {setWindowState}/>
         }
         if(windowState[0] === "post"){
-            return <PostPage />
+            
+            return <PostPage/>
         }
         if(windowState[0] === "profile"){
             return <Profile_page setWindowState={setWindowState}/>

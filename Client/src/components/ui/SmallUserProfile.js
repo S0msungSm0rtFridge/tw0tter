@@ -1,5 +1,8 @@
 import '../../StyleSheets/SmallUserProfile.css'
 
+
+//the user profiles when clicking on following or followers on profile page
+//small version of the full user profile
 function SmallUserProfile(){
     return (
         <div className ="small-user-side-profile-container">

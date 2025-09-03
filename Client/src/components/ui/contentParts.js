@@ -1,7 +1,8 @@
-import { postBox } from './postBox';
+import { PostBox } from './postBox';
 import { PostPage } from '../../pages/Postpage';
 
 
+//main content area of homepage, is the miiddle bar when logging on tiwtter
 function MainContent({setWindowState}){
 
     return (
@@ -16,6 +17,7 @@ function MainContent({setWindowState}){
                 <button>Post</button>
             </div>
             <div className = "content-area" onClick = { () => console.log("pressed a post")}>
+                {/*should be post boxes instead of post page*/}
                 <div><PostPage /></div>
             </div>
         </div>

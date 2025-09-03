@@ -1,6 +1,8 @@
 import { postBox } from "../components/ui/postBox.js"
 import '../StyleSheets/Communities.css';
 
+//the communities page
+//nothing is functional and i dont even know how communitoies work on twitter
 function Communities({setWindowState}){
     return (
         <div className = "Communities-main-page">

@@ -1,8 +1,11 @@
 import '../../StyleSheets/postbox.css';
 
-function postBox(post, setState){
+//small basic post
+//us the post that is displayed everywhere on twitter
+//clicking on it will set the state to post and the id of the post
+function PostBox({post, setWindowState}){
     return (
-        <div className = "post-box" onClick = { () => setState(["post", post.postID])}>
+        <div className = "post-box" onClick = { () => setWindowState(["post", post.postID])}>
             <div className = "post-meta-data">
                 <div className = "post-user-name">{post.postedBy}</div>
                 <div className = "post-date">{post.postedDate}</div>
@@ -20,4 +23,4 @@ function postBox(post, setState){
     )
 }
 
-export {postBox}
+export {PostBox}

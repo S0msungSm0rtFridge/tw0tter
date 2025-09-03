@@ -1,5 +1,7 @@
 import { SmallUserProfile } from "../components/ui/SmallUserProfile"
 
+
+//following page on propfile will swap between followers anf ollowing
 function FollowingPage({setWindowState}){
     return(
         <div className = "following-page-main-container">
