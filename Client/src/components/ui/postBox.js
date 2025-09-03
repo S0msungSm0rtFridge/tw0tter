@@ -1,26 +1,28 @@
 import '../../StyleSheets/postbox.css';
 
-//small basic post
-//us the post that is displayed everywhere on twitter
-//clicking on it will set the state to post and the id of the post
-function PostBox({post, setWindowState}){
+function PostBox({post, setWindowState, user}) {
+    if (!user) return null;
     return (
-        <div className = "post-box" onClick = { () => setWindowState(["post", post.postID])}>
-            <div className = "post-meta-data">
-                <div className = "post-user-name">{post.postedBy}</div>
-                <div className = "post-date">{post.postedDate}</div>
-            </div>
-            <div className = "main-post-content">{post.content}</div>
-            <div className = "main-post-footer">
-                <button>reply</button>
-                <button>retweet</button>
-                <button>like</button>
-                <button>views</button>
-                <button>bookmark</button>
-                <button>share</button>
+        <div className="post-box" onClick={() => setWindowState(["post", post.postID])}>
+            <img className="post-avatar" src={user.avatar} alt={user.username} />
+            <div style={{flex: 1}}>
+                <div className="post-user-info">
+                    <span className="post-user-name">{user.displayName}</span>
+                    <span className="post-user-handle">@{user.username}</span>
+                    <span className="post-date">· {post.postDate}</span>
+                </div>
+                <div className="main-post-content">{post.content}</div>
+                <div className="main-post-footer">
+                    <button title="Reply">💬</button>
+                    <button title="Retweet">🔁</button>
+                    <button title="Like">❤️</button>
+                    <button title="Views">👁️</button>
+                    <button title="Bookmark">🔖</button>
+                    <button title="Share">↗️</button>
+                </div>
             </div>
         </div>
-    )
+    );
 }
 
 export {PostBox}
