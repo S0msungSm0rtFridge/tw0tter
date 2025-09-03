@@ -13,13 +13,13 @@ function HomePage() {
     console.log(setWindowState);
     const windowHandler = () => {
         if(windowState[0] === "home"){
-            return <MainContent setState = {setWindowState}/>
+            return <MainContent setWindowState = {setWindowState}/>
         }
-        if(windowState[0] === 'commuinity'){
-            return <Communities setState = {setWindowState}/>
+        if(windowState[0] === 'community'){
+            return <Communities setWindowState = {setWindowState}/>
         }
         if(windowState[0] === "post"){
-            return <PostPage />
+            return <PostPage setWindowState = {setWindowState} windowState = {windowState}/>
         }
         if(windowState[0] === "profile"){
             return <Profile_page setWindowState={setWindowState}/>

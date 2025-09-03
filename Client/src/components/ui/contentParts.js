@@ -9,8 +9,12 @@ function MainContent({setWindowState}){
 
     useEffect(() => {
         getPosts().then((data) => setPost(data)).catch((error) => console.log(error));
+        
+    }, [posts]);
+
+    useEffect(() => {
         getUsers().then((data) => setUser(data)).catch((error) => console.log(error)); //make it so that it updates on a change to  database
-    }, []);
+    }, [users])
 
     return (
         <div className = "main-content-items">

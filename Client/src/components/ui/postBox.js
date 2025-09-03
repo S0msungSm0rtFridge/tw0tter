@@ -1,7 +1,9 @@
 import '../../StyleSheets/postbox.css';
 
 function PostBox({post, setWindowState, user}) {
-    if (!user) return null;
+    if (!user || !post) return(<div>Loading...</div>);
+    // console.log("postID is: ");
+    // console.log(post);
     return (
         <div className="post-box" onClick={() => setWindowState(["post", post.postID])}>
             <img className="post-avatar" src={user.avatar} alt={user.username} />

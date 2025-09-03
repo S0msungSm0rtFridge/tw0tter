@@ -1,5 +1,4 @@
 mysql -u root -p
-SELECT CURRENT_USER();
 SHOW DATABASES;
 CREATE DATABASE tw0tter; (if not there)
 USE "name of database";
