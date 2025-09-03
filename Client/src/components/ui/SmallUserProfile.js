@@ -1,6 +1,6 @@
 import '../../StyleSheets/SmallUserProfile.css'
 
-function SmallUserProfile(){
+function SmallUserProfile(){ //profile page followingg and followers page
     return (
         <div className ="small-user-side-profile-container">
             <div className = "small-user-profile-header">

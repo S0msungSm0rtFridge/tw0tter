@@ -2,28 +2,19 @@ import '../StyleSheets/Postpage.css';
 import { useState, useEffect } from 'react';
 import { getPosts, getUsers } from '../asyncHelpers';
 
-function PostPage(){
-    const [posts, setPost] = useState([]);
-    const [users, setUser] = useState([]);
-
-    useEffect(() => {
-        getPosts().then((data) => setPost(data)).catch((error) => console.log(error));
-        getUsers().then((data) => setUser(data)).catch((error) => console.log(error));
-    }, []);
-
+function PostPage(){ //page afte ryou click a post
     return(
         <div className = "post-page-view">
-            {posts.map(post => (
             <div>
                 <div>
-                    {users.find((user) => user.userID === post.postBy).displayName}
+                    {}
                 </div>
                 <div className = "post-content">
-                    {post.content}
+                    {/* {post.content} */}
                 </div>
                 <div className = "post-footer-metadata">
                     <div className = "post-footer-post-date">
-                        {post.postedDate}
+                        {/* {post.postedDate} */}
                     </div>
                     <div className = "post-footer-view-count">
                     
@@ -44,7 +35,7 @@ function PostPage(){
                 <div className = "post-reply-section">
                     {/* need to get all the replys to this post, will do when backend is finished so i dont have to rebase this shit later*/}
                 </div>
-            </div>))}
+            </div>
         </div>
     );
 }
