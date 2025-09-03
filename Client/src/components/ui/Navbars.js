@@ -2,6 +2,9 @@ import '../../StyleSheets/Navbars.css';
 import { CreatePost } from '../features/CreatePost';
 import { useState } from 'react';
 
+
+//right and left nav bar
+//eklf explanatory
 function LeftNavBar({setWindowState}){
     const [CreatingPost, setCreatingPost] = useState(false);
     return (
@@ -28,6 +31,8 @@ function LeftNavBar({setWindowState}){
     )
 }
 
+
+//nothing in this section is funcitonal or even started
 function RightNavBar(){
     return (
         <div className = "right-nav-bar-objects">

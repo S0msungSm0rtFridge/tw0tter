@@ -1,12 +1,17 @@
 import '../../StyleSheets/LoginPage.css';
-
-
+import { SignUpPage, SignInPage } from '../ui/SignUpPage';
+import { useState } from 'react';
 //basic login page, lacks any auth and is not funvctional current;ly
 function LoginPage(){
+
+    const [SigningIn, setSigningIn] = useState(false);
+    const [SigningUp, setSigningUp] = useState(false);
 
     return (
 
         <div className = "login-page-main-container">
+            {SigningUp && <SignUpPage setSigningUp={setSigningUp}/>}
+            {SigningIn && <SignInPage setSigningIn={setSigningIn}/>}
             <div className = "login-page-left-side-logo"></div>
             <div className = "login-page-right-side-content">
                 <h1 className = "login-page-main-header">Happening Now</h1>
@@ -15,11 +20,11 @@ function LoginPage(){
                     <button className = "login-page-signup-with-google">Sign Up with google</button>
                     <button className = "login-page-signup-with-apple">Sign Up with apple</button>
                     <span className = "login-page-divider"></span>
-                    <button className = "login-page-signup-with-us">Create Account</button>
+                    <button className = "login-page-signup-with-us" onClick = { () => {setSigningUp(true)}}>Create Account</button>
                 </div>
                 <div className = "login=page-login-options">
                     <div className = "login-page-login-header">Already have an account?</div>
-                    <button className = "login-page-login-with-us">Sign In</button>
+                    <button className = "login-page-login-with-us" onClick = { () => {setSigningIn(true)}}>Sign In</button>
 
                 </div>
             </div>

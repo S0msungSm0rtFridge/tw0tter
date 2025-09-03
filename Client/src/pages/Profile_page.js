@@ -22,7 +22,7 @@ function Profile_page({setWindowState}){
                 <h5>@username</h5>
                 <h5>Joined date</h5>
                 <button onClick = { () => setWindowState(["following", null])}>Following</button>
-                <button>Followers</button>
+                <button onClick = { () => setWindowState(["following", null])}>Followers</button>
             </div>
             <div className = "profile-page-button-options">
                 <button>Posts</button>
