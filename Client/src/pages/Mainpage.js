@@ -19,8 +19,7 @@ function HomePage() {
             return <Communities setState = {setWindowState}/>
         }
         if(windowState[0] === "post"){
-            //let foundPost = twitterDummyData.posts.find((post) => post.postID === windowState[1]);
-            //return <PostPage post = {foundPost}/>
+            return <PostPage />
         }
         if(windowState[0] === "profile"){
             return <Profile_page setWindowState={setWindowState}/>
