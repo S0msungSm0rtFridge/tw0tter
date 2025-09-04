@@ -10,7 +10,7 @@ import { LoginPage } from '../components/features/Loginpage';
 
 
 function HomePage() {
-    const [windowState, setWindowState] = useState(["login", null]);
+    const [windowState, setWindowState] = useState(["home", null]);
 
     const windowComponents = {
         login: <LoginPage />,
