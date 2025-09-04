@@ -24,15 +24,15 @@ function SignUpPage({setSigningUp}){
     };
 
     const validateArgs = () => {
+        if(!monthRef.current || !dayRef.current || !yearRef.current || !nameRef.current || !phoneRef.current){ 
+            alert("Please fill out all fields")
+            return false;
+        }
         const name = nameRef.current.value;
         const phone = phoneRef.current.value;
         const month = monthRef.current.value;
         const day = dayRef.current.value;
         const year = yearRef.current.value;
-        if(name.length === 0 || phone.length === 0 || month.length === 0 || day.length === 0 || year.length === 0){
-            alert("Please fill out all fields")
-            return false;
-        }
         if(!/^\d+$/.test(phone)){
             alert("Please enter a valid phone number")
             return false;
