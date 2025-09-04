@@ -3,6 +3,7 @@ const router = express.Router();
 const database = require("../db.js");
 
 router.get('/', (req, resp) => { //grab all posts
+    // console.log("hello");
     database.query('SELECT * FROM posts', (err, res) => {
         if (err){
             return resp.status(500).json({ error: err.message });
@@ -28,6 +29,20 @@ router.get('/getWhoLike/:postID', (req, resp) => { //get all userids that liked 
             return resp.status(500).json({ error: err.message });
         }
         resp.json(res);
+    });
+});
+
+router.get('/getPost/:postID', (req, resp) => { //get a post by its ID
+    const postID = req.params.postID;
+    // console.log("confirm something happening");
+    // console.log(postID);
+    database.query(`SELECT * FROM posts WHERE postID = ?`, [postID], (err, res) => {
+        if (err){
+            return resp.status(500).json({ error: err.message });
+        }
+        // console.log("here now");  
+        // console.log(res);
+        resp.json(res[0]);
     });
 });
 

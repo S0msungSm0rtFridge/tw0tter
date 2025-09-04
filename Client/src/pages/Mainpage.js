@@ -2,7 +2,7 @@ import '../StyleSheets/Mainpage.css';
 import { LeftNavBar, RightNavBar } from '../components/ui/Navbars';
 import { MainContent } from '../components/ui/contentParts';
 import { Communities } from './Communities';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { PostPage } from './Postpage';
 import { Profile_page } from './Profile_page.js';
 import { FollowingPage } from './FollowPage.js';

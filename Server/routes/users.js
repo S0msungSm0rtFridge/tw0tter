@@ -31,4 +31,17 @@ router.get('/getFollowing/:userID', (req, resp) => { //grab all the ids a user f
     });
 });
 
+router.get('/getUser/:userID', (req, resp) => { //get a user by its userID
+    const userID = req.params.userID;
+    // console.log(userID);
+    database.query('SELECT * FROM users WHERE userID = ?', [userID], (err, res) => {
+        if (err){
+            return resp.status(500).json({ error: err.message});
+        }
+        // console.log("After query");
+        // console.log(res);
+        resp.json(res[0]);
+    });
+});
+
 module.exports = router;

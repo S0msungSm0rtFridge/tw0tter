@@ -1,44 +1,62 @@
 import '../StyleSheets/Postpage.css';
-import { useState, useEffect } from 'react';
-import { getPosts, getUsers } from '../asyncHelpers';
+import { useState, useEffect, useCallback } from 'react';
+import { getPostByID, getUserByID } from '../asyncHelpers';
 
-
-//the page that shows up when you click on a post
-function PostPage(){
-    const [posts, setPost] = useState([]);
-    const [users, setUser] = useState([]);
+function PostPage({setWindowState, windowState}){ //page afte ryou click a post
+    const [post, setPost] = useState(null);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        getPosts().then((data) => setPost(data)).catch((error) => console.log(error));
-        getUsers().then((data) => setUser(data)).catch((error) => console.log(error));
-    }, []);
+        getPostByID(windowState[1])
+            .then((data) => setPost(data))
+            .catch((error) => console.log(error));
+    }, [windowState]);
 
+    // if (post){console.log(post);}
+
+    useEffect(() => {
+        if (post) {
+            getUserByID(post.postBy)
+                .then((data) => setUser(data))
+                .catch((error) => console.log(error));
+        }
+    }, [post]);
+
+    const handleBackclick = useCallback(() => setWindowState(["home", null]), [setWindowState]);
+    // if (user){console.log(user);}
+
+    if (!user || !post){return(<div>Loading...</div>)}
+    // console.log(user);
     return(
         <div className = "post-page-view">
+            <div className="post-header">
+                <button className="back-button" onClick={ handleBackclick }>←</button>
+                <h1 className="post-title">Post</h1>
+            </div>
             <div>
                 <div>
-                    {}
+                    <div>{user.displayName}</div>
                 </div>
                 <div className = "post-content">
-                    {/* {post.content} */}
+                    {post.content}
                 </div>
                 <div className = "post-footer-metadata">
                     <div className = "post-footer-post-date">
-                        {/* {post.postedDate} */}
+                        {post.postedDate}
                     </div>
                     <div className = "post-footer-view-count">
-                    
+                        {post.views} views
                     </div>
                 </div>
-                    <div className = "post-button-options">
-                    <button>retweet</button>
-                    <button>like</button>
-                    <button>bookmark</button>
-                    <button>share</button>
+                <div className = "post-button-options">
+                    <button>💬</button>
+                    <button>🔄</button>
+                    <button>❤️</button>
+                    <button>🔖</button>
+                    <button>📤</button>
                 </div>
                 <div className = "post-reply-option">
-                    <textarea className = "post-footer-reply-option">
-
+                    <textarea className = "post-footer-reply-option" placeholder="Tweet your reply">
                     </textarea>
                     <button className = "post-reply-button">Reply</button>
                 </div>

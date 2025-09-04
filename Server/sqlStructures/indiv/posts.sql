@@ -7,6 +7,7 @@ CREATE TABLE posts (
     communityID INT NOT NULL,
     content TEXT,
     postDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    views INT DEFAULT 0,
     FOREIGN KEY (postBy) REFERENCES users(userID),
     FOREIGN KEY (communityID) REFERENCES communities(communityID)
 );

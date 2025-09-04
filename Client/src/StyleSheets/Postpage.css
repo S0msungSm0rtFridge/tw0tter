@@ -2,57 +2,113 @@
 .post-page-view {
   max-width: 600px;
   margin: 0 auto;
-  padding: 16px;
-  border-bottom: 1px solid #e1e8ed;
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: #fff;
+  color: #0f1419;
+  min-height: 100vh;
+  border-left: 1px solid #e1e8ed;
+  border-right: 1px solid #e1e8ed;
 }
 
 /* Post header */
-.post-header-metadata {
+.post-header {
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e1e8ed;
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 100;
 }
 
-.post-user-profile-picture {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background-color: #ccc; /* placeholder */
-  margin-right: 10px;
-}
-
-.post-username {
-  font-weight: bold;
-  font-size: 16px;
+/* Back button */
+.back-button {
+  background: none;
+  border: none;
   color: #0f1419;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 8px;
+  margin-right: 20px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: rgba(15, 20, 25, 0.1);
+}
+
+/* Post title */
+.post-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f1419;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Main post container */
+.post-page-view > div:nth-child(2) {
+  padding: 20px;
+}
+
+/* Post header with user info */
+.post-page-view > div:nth-child(2) > div:first-child {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.post-page-view > div:nth-child(2) > div:first-child > div:first-child {
+  font-weight: 700;
+  font-size: 20px;
+  color: #0f1419;
+  margin-bottom: 4px;
 }
 
 /* Post content */
 .post-content {
-  font-size: 20px;
-  line-height: 1.5;
-  margin-bottom: 12px;
+  font-size: 23px;
+  line-height: 1.4;
+  margin-bottom: 16px;
   color: #0f1419;
+  font-weight: 400;
+  word-wrap: break-word;
 }
 
-/* Post footer metadata (date + views) */
+/* Post footer metadata */
 .post-footer-metadata {
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
   color: #536471;
-  font-size: 14px;
+  font-size: 15px;
   border-bottom: 1px solid #e1e8ed;
-  padding-bottom: 12px;
-  margin-bottom: 12px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
 }
 
-/* Action buttons (reply, retweet, like, etc.) */
+.post-footer-post-date {
+  color: #536471;
+}
+
+.post-footer-view-count {
+  color: #536471;
+}
+
+/* Action buttons container */
 .post-button-options {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 12px;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 0 8px;
 }
 
 .post-button-options button {
@@ -60,25 +116,60 @@
   border: none;
   color: #536471;
   cursor: pointer;
-  font-size: 14px;
-  padding: 8px 12px;
-  border-radius: 25px;
-  transition: background 0.2s;
+  font-size: 13px;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
 }
 
 .post-button-options button:hover {
-  background-color: #f0f2f5;
+  background-color: rgba(29, 155, 240, 0.1);
   color: #1d9bf0;
 }
 
-/* Reply box */
+/* Reply button specific styling */
+.post-button-options button:nth-child(1):hover {
+  background-color: rgba(29, 155, 240, 0.1);
+  color: #1d9bf0;
+}
+
+/* Retweet button specific styling */
+.post-button-options button:nth-child(2):hover {
+  background-color: rgba(0, 186, 124, 0.1);
+  color: #00ba7c;
+}
+
+/* Like button specific styling */
+.post-button-options button:nth-child(3):hover {
+  background-color: rgba(249, 24, 129, 0.1);
+  color: #f91880;
+}
+
+/* Bookmark button specific styling */
+.post-button-options button:nth-child(4):hover {
+  background-color: rgba(29, 155, 240, 0.1);
+  color: #1d9bf0;
+}
+
+/* Share button specific styling */
+.post-button-options button:nth-child(5):hover {
+  background-color: rgba(29, 155, 240, 0.1);
+  color: #1d9bf0;
+}
+
+/* Reply section */
 .post-reply-option {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   border-top: 1px solid #e1e8ed;
-  padding-top: 12px;
-  margin-bottom: 20px;
+  padding-top: 16px;
+  margin-bottom: 0;
 }
 
 .post-footer-reply-option {
@@ -86,10 +177,17 @@
   resize: none;
   border: none;
   outline: none;
-  font-size: 16px;
-  padding: 10px;
-  border-radius: 12px;
-  background-color: #f0f2f5;
+  font-size: 20px;
+  padding: 12px 0;
+  background: transparent;
+  color: #0f1419;
+  font-family: inherit;
+  line-height: 1.4;
+  min-height: 60px;
+}
+
+.post-footer-reply-option::placeholder {
+  color: #536471;
 }
 
 .post-reply-button {
@@ -97,21 +195,44 @@
   color: white;
   border: none;
   padding: 8px 16px;
-  border-radius: 25px;
-  font-weight: bold;
+  border-radius: 20px;
+  font-weight: 700;
   cursor: pointer;
-  align-self: center;
-  transition: background 0.2s;
+  font-size: 15px;
+  transition: background-color 0.2s;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-.post-reply-button:hover {
+.post-reply-button:enabled {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.post-reply-button:hover:enabled {
   background-color: #1a8cd8;
 }
 
-/* Replies section placeholder */
+/* Replies section */
 .post-reply-section {
   border-top: 1px solid #e1e8ed;
-  padding-top: 12px;
+  padding-top: 16px;
   color: #536471;
-  font-size: 14px;
+  font-size: 15px;
+  min-height: 200px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .post-page-view {
+    max-width: 100%;
+  }
+  
+  .post-page-view > div:nth-child(2) {
+    padding: 16px;
+  }
+  
+  .post-content {
+    font-size: 20px;
+  }
 }

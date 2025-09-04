@@ -48,6 +48,7 @@ CREATE TABLE posts (
     communityID INT NOT NULL,
     content TEXT,
     postDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    views INT DEFAULT 0,
     FOREIGN KEY (postBy) REFERENCES users(userID),
     FOREIGN KEY (communityID) REFERENCES communities(communityID)
 );
@@ -128,10 +129,10 @@ INSERT INTO members (memberID, communityID) VALUES
 (3, 1), -- historybuff in Space Enthusiasts
 (2, 2); -- catlady13 in Cat Lovers
 
-INSERT INTO posts (objectTag, numLikes, numRetweet, postBy, communityID, content) VALUES
-('p', 1, 1, 1, 1, 'Just launched another rocket! 🚀'),
-('p', 1, 0, 2, 2, 'My cat just knocked over my coffee. Again.'),
-('p', 1, 1, 3, 1, 'Did you know the Roman Empire lasted over 1,000 years?');
+INSERT INTO posts (objectTag, numLikes, numRetweet, postBy, communityID, content, views) VALUES
+('p', 1, 1, 1, 1, 'Just launched another rocket! 🚀', 5),
+('p', 1, 0, 2, 2, 'My cat just knocked over my coffee. Again.', 3),
+('p', 1, 1, 3, 1, 'Did you know the Roman Empire lasted over 1,000 years?', 10);
 
 INSERT INTO retweets (userID, postID) VALUES
 (2, 1), -- catlady13 retweets elonmusk's post
