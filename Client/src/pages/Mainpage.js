@@ -14,8 +14,8 @@ function HomePage() {
 
     const windowComponents = {
         login: <LoginPage />,
-        home: <MainContent setState={setWindowState} />,
-        community: <Communities setState={setWindowState} />,
+        home: <MainContent setWindowState={setWindowState} />,
+        community: <Communities setWindowState={setWindowState} />,
         post: <PostPage />,
         profile: <Profile_page setWindowState={setWindowState} />,
         following: <FollowingPage setWindowState={setWindowState} />,
