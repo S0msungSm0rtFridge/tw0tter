@@ -1,16 +1,16 @@
-CREATE TABLE communities(
-    communityID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    objectTag VARCHAR(1),
-    `name` VARCHAR(50) NOT NULL,
-    `description` TEXT, 
-    numMember INT DEFAULT 0,
-    created DATETIME DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE communities(  -- community
+    communityID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, -- internal id for comunity 
+    objectTag VARCHAR(1),  -- 'c' for communities 
+    `name` VARCHAR(50) NOT NULL,   -- name of the community
+    `description` TEXT,  -- description of the community (might be unneeded)
+    numMember INT DEFAULT 0, -- number of members in the community
+    created DATETIME DEFAULT CURRENT_TIMESTAMP -- date when community is created
 );
 
 CREATE TABLE members(
-    memberID INT NOT NULL,
-    communityID INT NOT NULL,
-    PRIMARY KEY (memberID, communityID),
-    FOREIGN KEY (memberID) REFERENCES users(userID),
-    FOREIGN KEY (communityID) REFERENCES communities(communityID)
+    memberID INT NOT NULL, -- memberID
+    communityID INT NOT NULL, -- communityID
+    PRIMARY KEY (memberID, communityID), -- key is pair of memberID and communityID
+    FOREIGN KEY (memberID) REFERENCES users(userID), -- checker
+    FOREIGN KEY (communityID) REFERENCES communities(communityID) -- checker
 );

@@ -11,11 +11,11 @@ function MainContent({setWindowState, users}){
     }, []);
     // console.log("what is this");
     // console.log(users);
-    const handlePostclick = useCallback((postID) => {
+    const handlePostclick = useCallback((postID) => { //handler for post clicking
         setWindowState(["post", postID]);
     }, [setWindowState]);
 
-    return (
+    return ( 
         <div className = "main-content-items">
             <div className = "cain-content--nav--bar">
                 <button>For You</button>
@@ -27,12 +27,12 @@ function MainContent({setWindowState, users}){
                 <button>Post</button>
             </div>
             <div className = "content-area" onClick = { () => console.log("pressed a post")}>
-                <div>{posts.map(post => {return <PostBox 
+                <div>{posts.map(post => {return <PostBox //call of postBox to display every post
                 post={post} 
                 user={users.find((user) => user.userID === post.postBy)}
                 handlePostClick = {handlePostclick}
                 key={post.postID}
-                />})}</div> 
+                />})}</div>  
             </div>
         </div>
     )

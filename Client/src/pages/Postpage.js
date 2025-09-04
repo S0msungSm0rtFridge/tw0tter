@@ -51,7 +51,7 @@ function PostPage({setWindowState, windowState, users}){ //page afte ryou click 
     const handleBackclick = useCallback(() => setWindowState(["home", null]), [setWindowState]); //handle the back arrow
     // if (user){console.log(user);}
 
-    if (!user || !post){return(<div>Loading...</div>)}
+    if (!user || !post){return(<div>Loading...</div>)} //make sure post and user has been grabbed
     // console.log(user);
     return(
         <div className = "post-page-view">
@@ -88,7 +88,7 @@ function PostPage({setWindowState, windowState, users}){ //page afte ryou click 
                     <button className = "post-reply-button">Reply</button>
                 </div>
                 <div className = "post-reply-section">
-                    <Replies 
+                    <Replies  //function to display all replies
                         setWindowState = {setWindowState} 
                         windowState = {windowState} 
                         post = {post}

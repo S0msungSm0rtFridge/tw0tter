@@ -1,7 +1,7 @@
 import '../../StyleSheets/postbox.css';
 
 function PostBox({post, user, handlePostClick}) {
-    if (!user || !post) return(<div></div>);
+    if (!user || !post) return(<div></div>); //just make sure that post and user exist so no crash
     // console.log("postID is: ");
     // console.log(post);
     return (

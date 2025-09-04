@@ -12,7 +12,7 @@ router.get('/', (req, resp) => { //grab all posts
     });
 });
 
-router.get('/getChild/:postID', (req, resp) => {
+router.get('/getChild/:postID', (req, resp) => { //returns all posts that are a reply to another post
     const postID = req.params.postID;
     console.log(postID);
     database.query('SELECT * FROM posts WHERE parentPost = ?', [postID], (err, res) => {
@@ -58,7 +58,7 @@ router.get('/getPost/:postID', (req, resp) => { //get a post by its ID
     });
 });
 
-router.get('/getNumLike/:postID', (req, resp) => { //get number of likes of a post
+router.get('/getNumLike/:postID', (req, resp) => { //get number of likes of a post (might be useless)
     const postID = req.params.postID;
     database.query('SELECT numLikes FROM posts WHERE postID = ? ', [postID], (err, res) => {
         if (err){
@@ -68,7 +68,7 @@ router.get('/getNumLike/:postID', (req, resp) => { //get number of likes of a po
     });
 });
 
-router.get('/getNumRetweet/:postID', (req, resp) => { //get number of retweets of a post
+router.get('/getNumRetweet/:postID', (req, resp) => { //get number of retweets of a post (might be useless)
     const postID = req.params.postID;
     database.query('SELECT numRetweet FROM posts WHERE postID = ? ', [postID], (err, res) => {
         if (err){
