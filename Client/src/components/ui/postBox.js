@@ -5,7 +5,7 @@ function PostBox({post, user, handlePostClick}) {
     // console.log("postID is: ");
     // console.log(post);
     return (
-        <div className="post-box" onClick={() => handlePostClick(post.postID)}>
+        <div key={post.postID} className="post-box" onClick={() => handlePostClick(post.postID)}>
             <img className="post-avatar" src={user.avatar} alt={user.username} />
             <div style={{flex: 1}}>
                 <div className="post-user-info">

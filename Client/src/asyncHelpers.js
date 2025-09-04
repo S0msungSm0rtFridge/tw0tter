@@ -33,7 +33,7 @@ async function getFollowing(userID){ //get the people the user follows
     }
 }
 
-async function getUserByID(userID){
+async function getUserByID(userID){ //get a specific user via id
     try{
         console.log("running");
         const resp = await axios.get(`/api/users/getUser/${userID}`);
@@ -71,11 +71,24 @@ async function getPosts(){ //get all posts
     try {
         const resp = await axios.get("/api/posts");
         console.log("after");
-        // console.log(resp.data);
+        console.log(resp.data);
         return resp.data;
     }
     catch (error){
         console.error("Failed at fetching all posts", error);
+        throw error;
+    }
+}
+
+async function getChildrenPosts(postID){
+    try{
+        const resp = await axios.get(`/api/posts/getChild/${postID}`);
+        console.log("response");
+        console.log(resp.data);
+        return resp.data;
+    }  
+    catch (error){
+        console.error("Failed at getting children posts of a post");
         throw error;
     }
 }
@@ -136,37 +149,4 @@ async function getNumRetweet(postID){ //No need anymore, delete if you want
     }
 }
 
-async function getReplies(){ //grab all replies. Needs to be reworked. its a fundamentally useless function
-    try {
-        const resp = await axios.get("/api/replies");
-        return resp.data;
-    }
-    catch (error){
-        console.error("Failed at fetching all replies", error);
-        throw error;
-    }
-}
-
-async function getWhoLikeReply(replyID){ //get all who liked a reply
-    try {
-        const resp = await axios.get(`/api/replies/getWhoLike/${replyID}`);
-        return resp.data;
-    }
-    catch (error){
-        console.error("Failed at getting all people that liked a post", error);
-        throw error;
-    }
-}
-
-async function getNumLikeReply(replyID){ //also useless now. 
-    try {
-        const resp = await axios.get(`/api/replies/getNumLike/${replyID}`);
-        return resp.data;
-    }
-    catch (error){
-        console.error("Failed at getting all people that liked a post", error);
-        throw error;
-    }
-}
-
-export { getUsers, getCommunities, getUserByID, getPosts, getPostByID, getReplies, getFollowers, getFollowing, getMembers, getWhoLikePost, getWhoLikeReply, getNumLikePost, getNumLikeReply, getWhoRetweet, getNumRetweet};
+export { getUsers, getCommunities, getUserByID, getChildrenPosts, getPosts, getPostByID, getFollowers, getFollowing, getMembers, getWhoLikePost, getNumLikePost, getWhoRetweet, getNumRetweet};

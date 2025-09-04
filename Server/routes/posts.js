@@ -4,10 +4,22 @@ const database = require("../db.js");
 
 router.get('/', (req, resp) => { //grab all posts
     // console.log("hello");
-    database.query('SELECT * FROM posts', (err, res) => {
+    database.query('SELECT * FROM posts WHERE parentPost IS NULL', (err, res) => {
         if (err){
             return resp.status(500).json({ error: err.message });
         }
+        resp.json(res);
+    });
+});
+
+router.get('/getChild/:postID', (req, resp) => {
+    const postID = req.params.postID;
+    console.log(postID);
+    database.query('SELECT * FROM posts WHERE parentPost = ?', [postID], (err, res) => {
+        if (err){
+            return resp.status(500).json({ error: err.message });
+        }
+        console.log(res);
         resp.json(res);
     });
 });

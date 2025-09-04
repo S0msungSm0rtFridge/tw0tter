@@ -10,7 +10,6 @@ app.use(express.json());
 app.use('/api/users', require("./routes/users.js"));
 app.use('/api/communities', require("./routes/communities.js"));
 app.use('/api/posts', require('./routes/posts.js'));
-app.use('/api/replies', require('./routes/replies.js'));
 
 app.listen(3001, () => {
     console.log("Server runnning on http://localhost:3001");

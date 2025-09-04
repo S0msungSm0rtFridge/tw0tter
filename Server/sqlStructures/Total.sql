@@ -18,7 +18,6 @@ CREATE TABLE follows(
     FOREIGN KEY (followerID) REFERENCES users(userID),
     FOREIGN KEY (followingID) REFERENCES users(userID)
 );
-
 -- communities
 CREATE TABLE communities(
     communityID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -36,21 +35,22 @@ CREATE TABLE members(
     FOREIGN KEY (memberID) REFERENCES users(userID),
     FOREIGN KEY (communityID) REFERENCES communities(communityID)
 );
-
 -- posts
-
 CREATE TABLE posts (
     postID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     objectTag VARCHAR(1) NOT NULL, 
     numLikes INT DEFAULT 0,
     numRetweet INT DEFAULT 0,
+    numReplies INT DEFAULT 0,
     postBy INT NOT NULL,
+    parentPost INT DEFAULT NULL,
     communityID INT NOT NULL,
     content TEXT,
     postDate DATETIME DEFAULT CURRENT_TIMESTAMP,
     views INT DEFAULT 0,
     FOREIGN KEY (postBy) REFERENCES users(userID),
-    FOREIGN KEY (communityID) REFERENCES communities(communityID)
+    FOREIGN KEY (communityID) REFERENCES communities(communityID),
+    FOREIGN KEY (parentPost) REFERENCES posts(postID)
 );
 
 CREATE TABLE retweets (
@@ -69,45 +69,7 @@ CREATE TABLE post_likes (
     FOREIGN KEY (postID) REFERENCES posts(postID)
 );
 
--- replies
-
-CREATE TABLE replies(
-    replyID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    objectTag VARCHAR(1),
-    parentObjectTag VARCHAR(1),
-    numLikes INT DEFAULT 0,
-    content VARCHAR(255),
-    commentBy INT NOT NULL,
-    commentDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (commentBy) REFERENCES users(userID)
-);
-
-CREATE TABLE reply_post (
-    replyID INT NOT NULL,
-    postID INT NOT NULL,
-    PRIMARY KEY(replyID, postID), 
-    FOREIGN KEY (replyID) REFERENCES replies(replyID),
-    FOREIGN KEY (postID) REFERENCES posts(postID)
-);
-
-CREATE TABLE reply_comment (
-    replyID INT NOT NULL,
-    parentReplyID INT NOT NULL,
-    PRIMARY KEY (replyID, parentReplyID),
-    FOREIGN KEY (replyID) REFERENCES replies(replyID),
-    FOREIGN KEY (parentReplyID) REFERENCES replies(replyID)
-);
-
-
-CREATE TABLE reply_likes (
-    userID INT NOT NULL,
-    replyID INT NOT NULL,
-    PRIMARY KEY (userID, replyID),
-    FOREIGN KEY (userID) REFERENCES users(userID),
-    FOREIGN KEY (replyID) REFERENCES replies(replyID)
-);
-
--- dummy-data
+-- dummy_data
 
 INSERT INTO users (username, objectTag, displayName, bio, numFollower, numFollowing, avatar) VALUES
 ('elonmusk', 'u', 'Elon Musk', 'Mars, Cars, Chips, Starships. Tweets are my own.', 2, 1, 'https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png'),
@@ -129,10 +91,15 @@ INSERT INTO members (memberID, communityID) VALUES
 (3, 1), -- historybuff in Space Enthusiasts
 (2, 2); -- catlady13 in Cat Lovers
 
-INSERT INTO posts (objectTag, numLikes, numRetweet, postBy, communityID, content, views) VALUES
-('p', 1, 1, 1, 1, 'Just launched another rocket! 🚀', 5),
-('p', 1, 0, 2, 2, 'My cat just knocked over my coffee. Again.', 3),
-('p', 1, 1, 3, 1, 'Did you know the Roman Empire lasted over 1,000 years?', 10);
+INSERT INTO posts (objectTag, numLikes, numRetweet, numReplies, postBy, parentPost, communityID, content, views) VALUES
+('p', 1, 1, 2, 1, NULL, 1, 'Just launched another rocket! 🚀', 5),
+('p', 1, 0, 1, 2, NULL, 2, 'My cat just knocked over my coffee. Again.', 3),
+('p', 1, 1, 0, 3, NULL, 1, 'Did you know the Roman Empire lasted over 1,000 years?', 10),
+-- Replies to post 1 (Elon's rocket post)
+('p', 0, 0, 0, 3, 1, 1, 'Congrats! When are we going to Mars? 🚀', 2),
+('p', 1, 0, 0, 2, 1, 1, 'Amazing! The future is here!', 1),
+-- Reply to post 2 (Cat coffee post)
+('p', 0, 0, 0, 1, 2, 2, 'Classic cat move! 😸', 1);
 
 INSERT INTO retweets (userID, postID) VALUES
 (2, 1), -- catlady13 retweets elonmusk's post
@@ -143,25 +110,4 @@ INSERT INTO post_likes (userID, postID) VALUES
 (1, 2), -- elonmusk likes catlady13's post
 (3, 3); -- historybuff likes their own post
 
-INSERT INTO replies (objectTag, parentObjectTag, numLikes, content, commentBy) VALUES
-('r', 'p', 1, 'Congrats! When is Mars?', 3),
-('r', 'p', 0, 'Amazing! 🚀', 2),
-('r', 'p', 1, 'Classic cat move!', 3);
 
--- Link replies to posts
-INSERT INTO reply_post (replyID, postID) VALUES
-(1, 1), -- reply 1 to post 1
-(2, 1), -- reply 2 to post 1
-(3, 2); -- reply 3 to post 2
-
--- Example: reply to a reply (threaded comment)
-INSERT INTO replies (objectTag, parentObjectTag, numLikes, content, commentBy) VALUES
-('r', 'r', 0, 'I want to believe.', 2);
-
-INSERT INTO reply_comment (replyID, parentReplyID) VALUES
-(4, 1); -- reply 4 is a reply to reply 1
-
--- Likes for replies
-INSERT INTO reply_likes (userID, replyID) VALUES
-(1, 1), -- elonmusk likes reply 1
-(2, 3); -- catlady13 likes reply 3
