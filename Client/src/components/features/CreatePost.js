@@ -1,5 +1,7 @@
 import '../../StyleSheets/CreatePost.css'
 
+
+//page made for when someone hits the post btton on the leftNavBar
 function CreatePost({setCreatingPost}){
 
     return (

@@ -7,6 +7,8 @@ import { PostPage } from './Postpage';
 import { Profile_page } from './Profile_page.js';
 import { FollowingPage } from './FollowPage.js';
 import { getUsers } from '../asyncHelpers.js';
+import { LoginPage } from '../components/features/Loginpage';
+import { SearchPage } from './SearchPage.js';
 
 
 function HomePage() {
@@ -41,6 +43,9 @@ function HomePage() {
                 return <FollowingPage setWindowState={setWindowState}/>
             }
         }
+        if(windowState[0] === "search"){
+            return <SearchPage searchInput = {windowState[1]} setWindowState={setWindowState}/>
+        }
     }, [windowState, users]);
 
     return (
@@ -50,11 +55,12 @@ function HomePage() {
             </div>
 
             <div className = "main-content">
-                {windowHandler()}
+                {windowHandler()} 
+                
             </div>
 
             <div className = "right-nav-bar">
-                <RightNavBar />
+                <RightNavBar windowState={windowState} setWindowState={setWindowState}/>
             </div>
         </div>
     )

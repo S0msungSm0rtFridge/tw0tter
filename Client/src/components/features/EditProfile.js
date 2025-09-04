@@ -1,5 +1,8 @@
 import '../../StyleSheets/EditProfile.css'
 
+
+//page when someone wants to edit their profile
+//will disapear if the state isEditing is false
 function EditProfilePage({setisEditing}){
     console.log("this gets to here");
     return (

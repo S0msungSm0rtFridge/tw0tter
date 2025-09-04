@@ -1,12 +1,15 @@
 import '../../StyleSheets/SmallUserProfile.css'
 
-function SmallUserProfile(){ //profile page followingg and followers page
+
+//the user profiles when clicking on following or followers on profile page
+//small version of the full user profile
+function SmallUserProfile({user}){
     return (
         <div className ="small-user-side-profile-container">
             <div className = "small-user-profile-header">
-                <div className = "small-user-profile-profile-picture"></div>
-                <div className = "small-user-profile-name">THIS IS A TEST</div>
-                <div className = "small-user-profile-tage">THIS IS A TEST</div>
+                <img className="post-avatar" src={user?.avatar} alt={user?.username} />
+                <div className = "small-user-profile-name">{user?.username}</div>
+                <div className = "small-user-profile-tage">{user?.displayName}</div>
                 <button className = "small-user-profile-following-button">Following</button>
             </div>
             <div className = "small-user-profile-bio"></div>

@@ -1,6 +1,9 @@
 import "../StyleSheets/Profile_page.css"
 import { useState } from "react";
 import { EditProfilePage } from "../components/features/EditProfile";
+
+//if the profile page is being viewed
+//will set editing as a state
 function Profile_page({setWindowState}){
 
     const [isEditing, setisEditing] = useState(false);
@@ -19,7 +22,7 @@ function Profile_page({setWindowState}){
                 <h5>@username</h5>
                 <h5>Joined date</h5>
                 <button onClick = { () => setWindowState(["following", null])}>Following</button>
-                <button>Followers</button>
+                <button onClick = { () => setWindowState(["following", null])}>Followers</button>
             </div>
             <div className = "profile-page-button-options">
                 <button>Posts</button>

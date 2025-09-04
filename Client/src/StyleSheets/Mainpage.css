@@ -3,9 +3,16 @@
   display: grid;
   grid-template-columns: 250px 1fr 350px;
   height: 100vh;
+  width: 100%;
   background-color: #fff;
   color: #0f1419;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.homepage.no-nav {
+  display: block;
+  width: 100%;
+  height: 100vh;
 }
 
 /* Left Nav */
