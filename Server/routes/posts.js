@@ -78,4 +78,32 @@ router.get('/getNumRetweet/:postID', (req, resp) => { //get number of retweets o
     });
 });
 
+
+// get post with searched keywords
+router.get("/search", (req, res) => {
+    const search = req.query.search;
+
+    if (!search) {
+        return res.status(400).json({ error: "Search query is required" });
+    }
+
+    const words = search.trim().split(/\s+/);    
+    const conditions = [];
+    const values = [];
+
+    words.forEach(word => {
+        conditions.push("(content LIKE ?)");
+        values.push(`%${word}%`);
+    });
+
+
+    const sql = `SELECT * FROM posts WHERE ${conditions.join(" OR ")}`;
+
+    database.query(sql, values, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(results);
+    });
+});
 module.exports = router;
