@@ -2,7 +2,7 @@ import '../StyleSheets/Mainpage.css';
 import { LeftNavBar, RightNavBar } from '../components/ui/Navbars';
 import { MainContent } from '../components/ui/contentParts';
 import { Communities } from './Communities';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { PostPage } from './Postpage';
 import { Profile_page } from './Profile_page.js';
 import { FollowingPage } from './FollowPage.js';
@@ -11,7 +11,7 @@ import { FollowingPage } from './FollowPage.js';
 function HomePage() {
     const [windowState, setWindowState] = useState(["home", null]);
     console.log(setWindowState);
-    const windowHandler = () => {
+    const windowHandler = useCallback(() => {
         if(windowState[0] === "home"){
             return <MainContent setWindowState = {setWindowState}/>
         }
@@ -27,8 +27,7 @@ function HomePage() {
         if(windowState[0] === "following"){
             return <FollowingPage setWindowState={setWindowState}/>
         }
-
-    }
+    }, [windowState]);
 
     return (
         <div className = "homepage">

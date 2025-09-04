@@ -1,23 +1,27 @@
 import '../../StyleSheets/Navbars.css';
 import { CreatePost } from '../features/CreatePost';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 function LeftNavBar({setWindowState}){
     const [CreatingPost, setCreatingPost] = useState(false);
+    const handleHomeClick = useCallback(() => setWindowState(["home", null]), [setWindowState]);
+    const handleCommunityClick = useCallback(() => setWindowState(["community", null]), [setWindowState]);
+    const handleProfileClick = useCallback(() => setWindowState(["profile", null]), [setWindowState]);
+
     return (
         <div>
             <div className = "'logo"> Add Logo Here </div>
             <ul className = "left-nav-bar-objects">
-                <li onClick = { () => setWindowState(["home", null])}>Home</li>
+                <li onClick = { handleHomeClick }>Home</li>
                 <li>Explore</li>
                 <li>Notification</li>
                 <li>Messages</li>
                 <li>Bookmarks</li>
                 <li>Jobs</li>
-                <li onClick = { () => setWindowState(["commuinity", null])}>Communities</li>
+                <li onClick = { handleCommunityClick }>Communities</li>
                 <li>Premium</li>
                 <li>Verified Orgs</li>
-                <li onClick = { () => setWindowState(["profile", null])}>Profile</li>
+                <li onClick = { handleProfileClick }>Profile</li>
                 <li>More</li>
             </ul>
             <button className = "left-nav-bar-post-button" onClick = { () => setCreatingPost(true)}>Post</button>

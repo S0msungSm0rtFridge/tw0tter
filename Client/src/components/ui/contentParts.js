@@ -1,20 +1,23 @@
 import { PostBox } from './postBox';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getPosts, getUsers } from '../../asyncHelpers';
 
 function MainContent({setWindowState}){
 
-    const [posts, setPost] = useState([]);
-    const [users, setUser] = useState([]);
+    const [posts, setPost] = useState([]); //list of all posts
+    const [users, setUser] = useState([]); //list of all users
 
     useEffect(() => {
         getPosts().then((data) => setPost(data)).catch((error) => console.log(error));
-        
-    }, [posts]);
+    }, []);
 
     useEffect(() => {
         getUsers().then((data) => setUser(data)).catch((error) => console.log(error)); //make it so that it updates on a change to  database
-    }, [users])
+    }, []);
+
+    const handlePostclick = useCallback((postID) => {
+        setWindowState(["post", postID]);
+    }, [setWindowState]);
 
     return (
         <div className = "main-content-items">
@@ -28,7 +31,11 @@ function MainContent({setWindowState}){
                 <button>Post</button>
             </div>
             <div className = "content-area" onClick = { () => console.log("pressed a post")}>
-                <div>{posts.map(post => {return <PostBox post={post} setWindowState={setWindowState} user={users.find((user) => user.userID === post.postID)}/>})}</div> 
+                <div>{posts.map(post => {return <PostBox 
+                post={post} 
+                user={users.find((user) => user.userID === post.postID)}
+                handlePostClick = {handlePostclick}
+                />})}</div> 
             </div>
         </div>
     )

@@ -35,6 +35,7 @@ async function getFollowing(userID){ //get the people the user follows
 
 async function getUserByID(userID){
     try{
+        console.log("running");
         const resp = await axios.get(`/api/users/getUser/${userID}`);
         return resp.data;
     }  

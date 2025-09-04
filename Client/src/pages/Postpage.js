@@ -1,5 +1,5 @@
 import '../StyleSheets/Postpage.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getPostByID, getUserByID } from '../asyncHelpers';
 
 function PostPage({setWindowState, windowState}){ //page afte ryou click a post
@@ -22,17 +22,20 @@ function PostPage({setWindowState, windowState}){ //page afte ryou click a post
         }
     }, [post]);
 
+    const handleBackclick = useCallback(() => setWindowState(["home", null]), [setWindowState]);
     // if (user){console.log(user);}
 
     if (!user || !post){return(<div>Loading...</div>)}
     // console.log(user);
     return(
         <div className = "post-page-view">
-            <button onClick={() => setWindowState(["home", null])}>backarrow</button>
-            <div>POST</div>
+            <div className="post-header">
+                <button className="back-button" onClick={ handleBackclick }>←</button>
+                <h1 className="post-title">Post</h1>
+            </div>
             <div>
                 <div>
-                    {user.displayName}
+                    <div>{user.displayName}</div>
                 </div>
                 <div className = "post-content">
                     {post.content}
@@ -42,18 +45,18 @@ function PostPage({setWindowState, windowState}){ //page afte ryou click a post
                         {post.postedDate}
                     </div>
                     <div className = "post-footer-view-count">
-                        {post.views}
+                        {post.views} views
                     </div>
                 </div>
-                    <div className = "post-button-options">
-                    <button>retweet</button>
-                    <button>like</button>
-                    <button>bookmark</button>
-                    <button>share</button>
+                <div className = "post-button-options">
+                    <button>💬</button>
+                    <button>🔄</button>
+                    <button>❤️</button>
+                    <button>🔖</button>
+                    <button>📤</button>
                 </div>
                 <div className = "post-reply-option">
-                    <textarea className = "post-footer-reply-option">
-
+                    <textarea className = "post-footer-reply-option" placeholder="Tweet your reply">
                     </textarea>
                     <button className = "post-reply-button">Reply</button>
                 </div>
