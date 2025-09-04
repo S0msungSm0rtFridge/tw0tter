@@ -34,7 +34,7 @@ function MainContent({setWindowState}){
             <div className = "content-area" onClick = { () => console.log("pressed a post")}>
                 <div>{posts.map(post => {return <PostBox 
                 post={post} 
-                user={users.find((user) => user.userID === post.postID)}
+                userID={post.postedBy}
                 handlePostClick = {handlePostclick}
                 />})}</div> 
             </div>

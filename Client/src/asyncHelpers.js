@@ -35,7 +35,6 @@ async function getFollowing(userID){ //get the people the user follows
 
 async function getUserByID(userID){
     try{
-        console.log("running");
         const resp = await axios.get(`/api/users/getUser/${userID}`);
         return resp.data;
     }  
@@ -70,7 +69,6 @@ async function getMembers(communityID){ //get all members of a community
 async function getPosts(){ //get all posts
     try {
         const resp = await axios.get("/api/posts");
-        console.log("after");
         // console.log(resp.data);
         return resp.data;
     }

@@ -7,45 +7,48 @@ import { PostPage } from './Postpage';
 import { Profile_page } from './Profile_page.js';
 import { FollowingPage } from './FollowPage.js';
 import { LoginPage } from '../components/features/Loginpage';
+import { SearchPage } from './SearchPage.js';
 
 
 function HomePage() {
     const [windowState, setWindowState] = useState(["home", null]);
+    const windowHandler = useCallback(() => {
+        if(windowState[0] === "home"){
+            return <MainContent setWindowState = {setWindowState}/>
+        }
+        if(windowState[0] === 'community'){
+            return <Communities setWindowState = {setWindowState}/>
+        }
+        if(windowState[0] === "post"){
+            return <PostPage setWindowState = {setWindowState} windowState = {windowState}/>
+        }
+        if(windowState[0] === "profile"){
+            return <Profile_page setWindowState={setWindowState}/>
+        }
+        if(windowState[0] === "following"){
+            return <FollowingPage setWindowState={setWindowState}/>
+        }
+        if(windowState[0] === "search"){
+            return <SearchPage searchInput = {windowState[1]} setWindowState={setWindowState}/>
+        }
+    }, [windowState]);
 
-    const windowComponents = {
-        login: <LoginPage />,
-        home: <MainContent setWindowState={setWindowState} />,
-        community: <Communities setWindowState={setWindowState} />,
-        post: <PostPage />,
-        profile: <Profile_page setWindowState={setWindowState} />,
-        following: <FollowingPage setWindowState={setWindowState} />,
-    };
-
-    const CurrentWindow = windowComponents[windowState[0]] || null;
-    const showNavbar = windowState[0] !== "login";
-
-    if(!showNavbar) {
-        return (
-            <div className= "homepage no-nav">
-                {CurrentWindow}
-            </div>
-        );
-    }
     return (
-        <div className="homepage">
-            <div className="left-nav-Bar">
-                <LeftNavBar setWindowState={setWindowState} />
+        <div className = "homepage">
+            <div className = "left-nav-Bar">
+                <LeftNavBar setWindowState={setWindowState}/>
             </div>
 
-            <div className="main-content">
-                {CurrentWindow}
+            <div className = "main-content">
+                {windowHandler()} 
+                
             </div>
 
-            <div className="right-nav-bar">
-                <RightNavBar />
+            <div className = "right-nav-bar">
+                <RightNavBar windowState={windowState} setWindowState={setWindowState}/>
             </div>
         </div>
-    );
+    )
 }
 
 export default HomePage;
