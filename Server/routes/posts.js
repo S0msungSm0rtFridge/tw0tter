@@ -78,6 +78,21 @@ router.get('/getNumRetweet/:postID', (req, resp) => { //get number of retweets o
     });
 });
 
+router.post('/updateView/:postID', (req, resp) => { //update views in the database
+    const postID = req.params.postID;
+    database.query('UPDATE posts SET views = views + 1 WHERE postID = ?', [postID], (err, res) => {
+        if (err){
+            return resp.status(500).json( {error: err.message});
+        }
+        
+        if (res.affectedRows == 0){
+            return resp.status(404).json({error: 'Post not found'});
+        }
+
+        return resp.status(200).json({ success: true });
+    });
+});
+
 
 // get post with searched keywords
 router.get("/search", (req, res) => {

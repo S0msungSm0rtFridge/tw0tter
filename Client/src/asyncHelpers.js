@@ -66,6 +66,17 @@ async function getMembers(communityID){ //get all members of a community
     }
 }
 
+async function updatePostViews(postID){
+    try{
+        const resp = await axios.post(`/api/posts/updateView/${postID}`);
+        return resp;
+    }
+    catch (error){
+        console.error("failed to update views of post", error);
+        throw error;
+    }
+}
+
 async function getPosts(){ //get all posts
     try {
         const resp = await axios.get("/api/posts");
@@ -148,4 +159,4 @@ async function getNumRetweet(postID){ //No need anymore, delete if you want
     }
 }
 
-export { getUsers, getCommunities, getUserByID, getChildrenPosts, getPosts, getPostByID, getFollowers, getFollowing, getMembers, getWhoLikePost, getNumLikePost, getWhoRetweet, getNumRetweet};
+export { getUsers, getCommunities, getUserByID, updatePostViews, getChildrenPosts, getPosts, getPostByID, getFollowers, getFollowing, getMembers, getWhoLikePost, getNumLikePost, getWhoRetweet, getNumRetweet};
