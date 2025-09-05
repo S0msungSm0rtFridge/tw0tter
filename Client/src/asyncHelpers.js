@@ -156,7 +156,7 @@ async function getWhoLikeReply(replyID){ //get all who liked a reply
     }
 }
 
-async function getNumLikeReply(replyID){ //also useless now. 
+async function getNumLikeReply(replyID){ //also useless now. //if useless y not delete????? 
     try {
         const resp = await axios.get(`/api/replies/getNumLike/${replyID}`);
         return resp.data;

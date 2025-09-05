@@ -57,7 +57,7 @@ function RightNavBar({windowState, setWindowState}){
                 <div className = "right-nav-bar-search-filters-container">
                     <h5>People</h5>
                     <button>From Anyone</button>
-                    <button>From Anyone</button>
+                    <button>People you Follow</button>
                     <h5>Location</h5>
                     <button>Anywhere</button>
                     <button>Near you</button>

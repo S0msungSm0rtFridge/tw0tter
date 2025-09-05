@@ -9,6 +9,7 @@ import { FollowingPage } from './FollowPage.js';
 import { LoginPage } from '../components/features/Loginpage';
 import { SearchPage } from './SearchPage.js';
 
+import { FollowProvider } from '../components/wrappers/FollowingContext.js';
 
 function HomePage() {
     const [windowState, setWindowState] = useState(["home", null]);
@@ -38,11 +39,11 @@ function HomePage() {
             <div className = "left-nav-Bar">
                 <LeftNavBar setWindowState={setWindowState}/>
             </div>
-
-            <div className = "main-content">
-                {windowHandler()} 
-                
-            </div>
+            <FollowProvider>
+                <div className = "main-content">
+                    {windowHandler()} 
+                </div>
+            </FollowProvider>
 
             <div className = "right-nav-bar">
                 <RightNavBar windowState={windowState} setWindowState={setWindowState}/>

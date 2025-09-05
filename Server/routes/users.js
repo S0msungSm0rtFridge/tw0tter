@@ -43,7 +43,34 @@ router.get('/getUser/:userID', (req, resp) => { //get a user by its userID
         resp.json(res[0]);
     });
 });
+//follow a user
+router.post('/follow', (req, res) => {
+    const { followerID, followingID } = req.body;
 
+    const sql = "INSERT INTO follows (followerID, followingID) VALUES (?, ?)"
+
+    document.query(sql, [followerID, followingID], (err) => {
+        if(err){
+            return res.status(500).json({err: err.message});
+        }
+        res.json({message: "followed successfully"});
+    })
+});
+
+//unfollow a user
+router.post('/unfollow', (req, res) => {
+
+    const { followerID, followingID } = req.body;
+
+    const sql = "DELETE FROM follows WHERE followerID = ? AND followingID = ?"
+
+    document.query(sql, [followerID, followingID], (err) => {
+        if(err){
+            return res.status(500).json({err: err.message});
+        }
+        res.json({message: "unfollowed successfully"});
+    })
+})
 
 // get user with searched keywords
 router.get("/search", (req, res) => {
