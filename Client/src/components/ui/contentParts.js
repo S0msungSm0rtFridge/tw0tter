@@ -1,10 +1,13 @@
 import { PostBox } from './postBox';
 import { useState, useEffect, useCallback } from 'react';
 import { getPosts, getUsers } from '../../asyncHelpers';
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+
 
 //main content area of homepage, is the miiddle bar when logging on tiwtter
-function MainContent({setWindowState}){
+function MainContent(){
 
+    const navigate = useNavigate();
     const [posts, setPost] = useState([]); //list of all posts
     const [users, setUser] = useState([]); //list of all users
 
@@ -17,8 +20,8 @@ function MainContent({setWindowState}){
     }, []);
 
     const handlePostclick = useCallback((postID) => {
-        setWindowState(["post", postID]);
-    }, [setWindowState]);
+        navigate(`/post/${postID}`);
+    }, [navigate]);
 
     return (
         <div className = "main-content-items">

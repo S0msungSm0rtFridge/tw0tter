@@ -3,13 +3,22 @@ import "../StyleSheets/SearchPage.css"
 import { useState, useCallback, useEffect } from "react";
 import { PostBox } from "../components/ui/postBox";
 import { SmallUserProfile } from "../components/ui/SmallUserProfile";
+import { useNavigate, useLocation, useParams  } from "react-router-dom";
 
 
-function SearchPage({searchInput, setWindowState}) {
 
+//need to add display list that can click to profile when searching anything
+//need to add all tabs
+//need to add filters
+//need to change right navbar when on this page
+function SearchPage() {
+
+    const searchInput = useParams();
+    const navigate = useNavigate();
     const [searchedValue, setsearchedValue] = useState(searchInput);
     const [SearchedPost, setSearchedPosts] = useState(null);
     const [SearchedUser, setSearchedUser] = useState(null);
+    const [pageOption, setPageOption] = useState("Top");
 
     const serachFor = async (value) => {
         try{
@@ -32,8 +41,8 @@ function SearchPage({searchInput, setWindowState}) {
     }
 
     const handlePostClick = useCallback((postID) => {
-        setWindowState(["post", postID]);
-    }, [setWindowState]);
+        navigate(`/post/${postID}`);
+    }, [navigate]);
     
     //runs on first mount from nbavBar
     useEffect(() => {
@@ -66,29 +75,50 @@ function SearchPage({searchInput, setWindowState}) {
                 onKeyDown={handleKeyPress}></input>
                 <button className = "search-button-advanced-options">...</button>
                 <div className = "serach-bar-header-options">
-                    <button className = "search-bar-header-options-button active">Top</button>
+                    <button className = "search-bar-header-options-button active" onClick = { () => setPageOption("Top")}>Top</button>
                     <button className = "search-bar-header-options-button">Latest</button>
-                    <button className = "search-bar-header-options-button">People</button>
+                    <button className = "search-bar-header-options-button" onClick = { () => setPageOption("People")}>People</button>
                     <button className = "search-bar-header-options-button">Media</button>
                     <button className = "search-bar-header-options-button">List</button>
                 </div>
             </div>
-                <div className="search-page-user-list">
-                    {SearchedUser?.map((user) => {
-                        return <SmallUserProfile user={user}/>})
-                    }
-                    <button className = "search-page-user-list-show-all">View All</button>
-                </div>
-                <div className="search-page-tweets">
-                    {SearchedPost?.map((post) => {
-                        return <PostBox post = {post} user={post.postBy} handlePostClick={handlePostClick} />
-                    })}
-
-                </div>
+               {pageOption === "Top" && <SearchPageContentTop SearchedUser={SearchedUser}SearchedPost={SearchedPost}handlePostClick={handlePostClick} setPageOption={setPageOption}/>}
+               {pageOption === "People" && <SearchPageContentPeople SearchedUser={SearchedUser}/>}
                 
         </div>
     )
 
 }
 
+function SearchPageContentTop({SearchedUser, SearchedPost, handlePostClick, setPageOption}) {
+    return (
+        <div>
+            <div className="search-page-user-list">
+                {SearchedUser?.slice(0,3).map((user) => {
+                    return <SmallUserProfile user={user}/>})
+                }
+                <button className = "search-page-user-list-show-all" onClick = { () => setPageOption("People")}>View All</button>
+            </div>
+            <div className="search-page-tweets">
+                {SearchedPost?.map((post) => {
+                    return <PostBox post = {post} user={post.postBy} handlePostClick={handlePostClick} />
+                })}
+
+            </div>
+        </div>
+    )
+}
+
+
+function SearchPageContentPeople({SearchedUser}) {
+    return (
+        <div>
+            <div className="search-page-user-list">
+                {SearchedUser?.map((user) => {
+                    return <SmallUserProfile user={user}/>})
+                }
+            </div>
+        </div>
+    )
+}
 export { SearchPage }

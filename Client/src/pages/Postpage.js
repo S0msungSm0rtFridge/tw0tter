@@ -1,16 +1,21 @@
 import '../StyleSheets/Postpage.css';
 import { useState, useEffect, useCallback } from 'react';
 import { getPostByID, getUserByID } from '../asyncHelpers';
+import { useNavigate, useLocation, useParams  } from "react-router-dom";
 
-function PostPage({setWindowState, windowState}){ //page afte ryou click a post
+function PostPage(){ //page afte ryou click a post
+
+    const navigate = useNavigate();
+    const { postId } = useParams();
+    
     const [post, setPost] = useState(null);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        getPostByID(windowState[1])
+        getPostByID(postId)
             .then((data) => setPost(data))
             .catch((error) => console.log(error));
-    }, [windowState]);
+    }, [postId]);
 
     // if (post){console.log(post);}
 
@@ -22,8 +27,10 @@ function PostPage({setWindowState, windowState}){ //page afte ryou click a post
         }
     }, [post]);
 
-    const handleBackclick = useCallback(() => setWindowState(["home", null]), [setWindowState]);
-    // if (user){console.log(user);}
+    // go back one step in history
+    const handleBackclick = useCallback(() => {
+        navigate(-1); 
+    }, [navigate]);    
 
     if (!user || !post){return(<div>Loading...</div>)}
     // console.log(user);

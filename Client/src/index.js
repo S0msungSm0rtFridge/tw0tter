@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+
 // import {ProfilePage, FollowPage, EditProfile} from './Client/Components/Profile_page.js';
 // import {LoginPage} from "./Client/Components/login.js"
 import HomePage from './pages/Mainpage.js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <HomePage />
+    <Router>
+      {/* ADD A AUTHENTICAITION CHECKER BEFORE REOUTES AND ADD AUTHNETICATION ROUTE change home from * to /home/* after auth  page is made */}
+      <Routes>
+          <Route path = "/*" element={< HomePage/>}/>
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 
