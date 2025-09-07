@@ -2,30 +2,33 @@ import '../../StyleSheets/Navbars.css';
 import { CreatePost } from '../features/CreatePost';
 import { useCallback, useState } from 'react';
 import axios from "axios";
+import { useNavigate, useLocation  } from "react-router-dom";
+
 
 
 //right and left nav bar
 //eklf explanatory
-function LeftNavBar({setWindowState}){
+function LeftNavBar(){
+
+    const navigate = useNavigate();
     const [CreatingPost, setCreatingPost] = useState(false);
-    const handleHomeClick = useCallback(() => setWindowState(["home", null]), [setWindowState]);
-    const handleCommunityClick = useCallback(() => setWindowState(["community", null]), [setWindowState]);
-    const handleProfileClick = useCallback(() => setWindowState(["profile", null]), [setWindowState]);
+    
 
     return (
         <div>
             <div className = "'logo"> Add Logo Here </div>
             <ul className = "left-nav-bar-objects">
-                <li onClick = { handleHomeClick }>Home</li>
+                <li onClick = { () => navigate(`/`) }>Home</li>
                 <li>Explore</li>
                 <li>Notification</li>
                 <li>Messages</li>
                 <li>Bookmarks</li>
                 <li>Jobs</li>
-                <li onClick = { handleCommunityClick }>Communities</li>
+                <li onClick = { () => navigate(`/communities`) }>Communities</li>
                 <li>Premium</li>
                 <li>Verified Orgs</li>
-                <li onClick = { handleProfileClick }>Profile</li>
+                {/** NEED TO ADD AUTH TO GET UR USER */}
+                <li onClick = { () => navigate(`/profile`) }>Profile</li>
                 <li>More</li>
             </ul>
             <button className = "left-nav-bar-post-button" onClick = { () => setCreatingPost(true)}>Post</button>
@@ -38,26 +41,29 @@ function LeftNavBar({setWindowState}){
 
 
 //nothing in this section is funcitonal or even started
-function RightNavBar({windowState, setWindowState}){
+function RightNavBar(){
 
     const [searchInput, setSearchInput] = useState("");
+    const navigate = useNavigate();
 
     const handleKeyPress = (event) => {
         if(event.key === "Enter"){
-            setWindowState(["search", searchInput]);
+            navigate(`/search?q=${encodeURIComponent(searchInput.trim())}`);
         }
     }
+    const location = useLocation();
+    const isSearchPage = location.pathname === '/search';
 
     //in search page
 
-    if(windowState[0] === "search"){
+    if(isSearchPage){
         return (
             <div className = "right-nav-bar-objects">
                 <h3 className = "right-nav-bar-search-filters">Search Filters</h3>
                 <div className = "right-nav-bar-search-filters-container">
                     <h5>People</h5>
                     <button>From Anyone</button>
-                    <button>From Anyone</button>
+                    <button>People you Follow</button>
                     <h5>Location</h5>
                     <button>Anywhere</button>
                     <button>Near you</button>

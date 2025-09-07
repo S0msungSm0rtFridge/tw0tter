@@ -1,11 +1,15 @@
 import "../StyleSheets/Profile_page.css"
 import { useState } from "react";
 import { EditProfilePage } from "../components/features/EditProfile";
+import { useNavigate, useLocation, useParams  } from "react-router-dom";
+
 
 //if the profile page is being viewed
 //will set editing as a state
-function Profile_page({setWindowState}){
+function Profile_page(){
 
+    const { userID } = useParams();
+    const navigate = useNavigate();
     const [isEditing, setisEditing] = useState(false);
 
     return (
@@ -21,8 +25,8 @@ function Profile_page({setWindowState}){
                 <h1>Name</h1>
                 <h5>@username</h5>
                 <h5>Joined date</h5>
-                <button onClick = { () => setWindowState(["following", null])}>Following</button>
-                <button onClick = { () => setWindowState(["following", null])}>Followers</button>
+                <button onClick = { () => navigate(`/following`)}>Following</button>
+                <button onClick = { () => navigate(`/following`)}>Followers</button>
             </div>
             <div className = "profile-page-button-options">
                 <button>Posts</button>

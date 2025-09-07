@@ -95,3 +95,41 @@
 .trending-list li:hover {
   background-color: #e8f5fe;
 }
+
+
+.right-nav-bar-search-filters {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.right-nav-bar-search-filters-container {
+  background: #f7f9f9;
+  border-radius: 16px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.right-nav-bar-search-filters-container h5 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 0.5rem 0 0.25rem;
+  color: #536471; /* Twitter gray */
+}
+
+.right-nav-bar-search-filters-container button {
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px; /* pill shape */
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.right-nav-bar-search-filters-container button:hover {
+  background: #e7e7e8;
+}

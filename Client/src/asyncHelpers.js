@@ -159,4 +159,37 @@ async function getNumRetweet(postID){ //No need anymore, delete if you want
     }
 }
 
-export { getUsers, getCommunities, getUserByID, updatePostViews, getChildrenPosts, getPosts, getPostByID, getFollowers, getFollowing, getMembers, getWhoLikePost, getNumLikePost, getWhoRetweet, getNumRetweet};
+async function getReplies(){ //grab all replies. Needs to be reworked. its a fundamentally useless function
+    try {
+        const resp = await axios.get("/api/replies");
+        return resp.data;
+    }
+    catch (error){
+        console.error("Failed at fetching all replies", error);
+        throw error;
+    }
+}
+
+async function getWhoLikeReply(replyID){ //get all who liked a reply
+    try {
+        const resp = await axios.get(`/api/replies/getWhoLike/${replyID}`);
+        return resp.data;
+    }
+    catch (error){
+        console.error("Failed at getting all people that liked a post", error);
+        throw error;
+    }
+}
+
+async function getNumLikeReply(replyID){ //also useless now. //if useless y not delete????? 
+    try {
+        const resp = await axios.get(`/api/replies/getNumLike/${replyID}`);
+        return resp.data;
+    }
+    catch (error){
+        console.error("Failed at getting all people that liked a post", error);
+        throw error;
+    }
+}
+
+export { getUsers, getCommunities, getUserByID, getPosts, getPostByID, getReplies, getFollowers, getFollowing, getMembers, getWhoLikePost, getWhoLikeReply, getNumLikePost, getNumLikeReply, getWhoRetweet, getNumRetweet};

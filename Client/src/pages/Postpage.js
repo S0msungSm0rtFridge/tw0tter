@@ -1,72 +1,21 @@
 import '../StyleSheets/Postpage.css';
 import { useState, useEffect, useCallback } from 'react';
-import { getChildrenPosts, getPostByID, getUserByID, updatePostViews } from '../asyncHelpers';
-import { FormatDateTime } from '../components/features/helper.js';
+import { getPostByID, getUserByID } from '../asyncHelpers';
+import { useNavigate, useLocation, useParams  } from "react-router-dom";
 
-function Replies({setWindowState, windowState, post, users}){
-    const [replies, setReplies] = useState([]);
+function PostPage(){ //page afte ryou click a post
+
+    const navigate = useNavigate();
+    const { postId } = useParams();
+    
+    const [post, setPost] = useState(null);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        getChildrenPosts(post.postID).then((data) => setReplies(data)).catch((error) => console.error(error));
-    }, [post])
-
-    const handleClickReply = useCallback((replyID) => { //handler to click on 
-        setWindowState(["post", replyID]);
-    }, [setWindowState]);
-
-    return(
-        <div className="replies-container">
-            {replies.map((reply) => {
-                const replyUser = users.find((user) => user.userID === reply.postBy);
-                return (
-                    <div key={reply.postID} className="reply-item" onClick={() => {handleClickReply(reply.postID); updatePostViews(reply.postID)}}>
-                        <div className="reply-avatar">
-                            <div className="avatar-circle">
-                                <img src={replyUser?.avatar}></img>
-                            </div>
-                        </div>
-                        <div className="reply-content">
-                            <div className="reply-header">
-                                <span className="reply-display-name">{replyUser?.displayName}</span>
-                                <span className="reply-username">@{replyUser?.username}</span>
-                                <span className="reply-time">· {<FormatDateTime datetime={reply.postDate}/>}</span>
-                            </div>
-                            <div className="reply-text">{reply.content}</div>
-                            <div className="reply-actions">
-                                <button className="reply-action-btn">
-                                    <span className="reply-icon">💬{reply.numReplies}</span>
-                                </button>
-                                <button className="reply-action-btn">
-                                    <span className="retweet-icon">🔄{reply.numRetweet}</span>
-                                </button>
-                                <button className="reply-action-btn">
-                                    <span className="like-icon">❤️{reply.numLikes}</span>
-                                </button>
-                                <button className="reply-action-btn">
-                                    <span className="like-icon">👁️{reply.views}</span>
-                                </button>
-                                <button className="reply-action-btn">
-                                    <span className="share-icon">📤</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                );
-            })}
-        </div>
-    );
-}
-
-
-function PostPage({setWindowState, windowState, users}){ //page afte ryou click a post
-    const [post, setPost] = useState(null); //post to be displayed
-    const [user, setUser] = useState(null); //user that made the post
-
-    useEffect(() => { //grab the correct post every time a post is clicked
-        getPostByID(windowState[1])
+        getPostByID(postId)
             .then((data) => setPost(data))
             .catch((error) => console.log(error));
-    }, [windowState]);
+    }, [postId]);
 
     // if (post){console.log(post);}
 
@@ -78,16 +27,10 @@ function PostPage({setWindowState, windowState, users}){ //page afte ryou click 
         }
     }, [post]);
 
-    const handleBackclick = useCallback((post) => {
-        if (post.parentPost == null){
-            setWindowState(["home", null]);
-        }
-        else {
-            setWindowState(["post", post.parentPost]);
-        }
-
-    }, [setWindowState]); //handle the back arrow
-    // if (user){console.log(user);}
+    // go back one step in history
+    const handleBackclick = useCallback(() => {
+        navigate(-1); 
+    }, [navigate]);    
 
     if (!user || !post){return(<div>Loading...</div>)} //make sure post and user has been grabbed
     // console.log(user);

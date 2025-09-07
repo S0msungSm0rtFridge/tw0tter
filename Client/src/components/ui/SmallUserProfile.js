@@ -1,9 +1,12 @@
 import '../../StyleSheets/SmallUserProfile.css'
-
-
+import { useFollowData } from '../wrappers/FollowingContext'
 //the user profiles when clicking on following or followers on profile page
 //small version of the full user profile
 function SmallUserProfile({user}){
+
+    const { Following, Followers, followUser, unfollowUser } = useFollowData();
+    //NEED AUTH TO FINISH THIS TO STORE US
+
     return (
         <div className ="small-user-side-profile-container">
             <div className = "small-user-profile-header">

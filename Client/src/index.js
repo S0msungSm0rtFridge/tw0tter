@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+
 // import {ProfilePage, FollowPage, EditProfile} from './Client/Components/Profile_page.js';
 // import {LoginPage} from "./Client/Components/login.js"
 import { useState } from 'react';
@@ -11,12 +14,13 @@ function App(){
   const [user, setUser] = useState(null);
   return(
   <React.StrictMode>
-    {user ? <HomePage /> : <LoginPage setUser={setUser}/>}
-  </React.StrictMode>);
-}
-
-root.render(
-  <App />
+    <Router>
+      {/* ADD A AUTHENTICAITION CHECKER BEFORE REOUTES AND ADD AUTHNETICATION ROUTE change home from * to /home/* after auth  page is made */}
+      <Routes>
+          <Route path = "/*" element={< HomePage/>}/>
+      </Routes>
+    </Router>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,30 +1,26 @@
 import { PostBox } from './postBox';
 import { useState, useEffect, useCallback } from 'react';
 import { getPosts, getUsers } from '../../asyncHelpers';
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+
 
 //main content area of homepage, is the miiddle bar when logging on tiwtter
-function MainContent({setWindowState}){
-    const [newPostCont, setNewPostCont] = useState(null);
-    const [submit, setsubmit] = useState(false);
+function MainContent(){
+
+    const navigate = useNavigate();
     const [posts, setPost] = useState([]); //list of all posts
 
     useEffect(() => {
         getPosts().then((data) => setPost(data)).catch((error) => console.log(error));
     }, []);
-    // console.log("what is this");
-    // console.log(users);
-    const handlePostclick = useCallback((postID) => { //handler for post clicking
-        setWindowState(["post", postID]);
-    }, [setWindowState]);
 
-    const handleSubmitPost = useCallback(() => {
-        setsubmit(true);
-        if (!newPostCont){
-            return; 
-        } 
-        
+    useEffect(() => {
+        getUsers().then((data) => setUser(data)).catch((error) => console.log(error)); //make it so that it updates on a change to  database
+    }, []);
 
-    });
+    const handlePostclick = useCallback((postID) => {
+        navigate(`/post/${postID}`);
+    }, [navigate]);
 
     return ( 
         <div className = "main-content-items">
