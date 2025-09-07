@@ -25,7 +25,7 @@ CREATE TABLE retweets (
 
 CREATE TABLE post_likes (  -- post and who likes
     userID INT NOT NULL, -- userID
-    postID INT NOT NULL, -- opstID
+    postID INT NOT NULL, -- postID
     PRIMARY KEY (userID, postID), -- pair of userID and postID
     FOREIGN KEY (userID) REFERENCES users(userID), -- checker
     FOREIGN KEY (postID) REFERENCES posts(postID) -- checker

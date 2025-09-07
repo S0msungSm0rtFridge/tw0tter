@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from 'react'
 function SignUpPage({setSigningUp}){
 
     const nameRef = useRef(null);
+    const displayRef = useRef(null);
     const phoneRef = useRef(null);
     const monthRef = useRef(null);
     const dayRef = useRef(null);
@@ -113,6 +114,7 @@ function SignInPage({setSigningIn}){
             </div>
             <div className = "sign-up-page-content-area">
                 <input className = "sign-up-page-name-input" placeholder="Name" maxLength={50} type="text" required ref = {nameRef}></input>
+                <input className= 'sign-up-page-name-input' placeholder="Display Name" maxLength={50} type="text" required ref = {displayRef}></input>
                 <input className = "sign-up-page-name-input" placeholder="Password" type="text" required ref = {passwordRef}></input>
             </div>
             <button className = "sign-up-page-next-button" onClick = { () => {validateArgs()}}>Next</button>

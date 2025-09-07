@@ -2,12 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 // import {ProfilePage, FollowPage, EditProfile} from './Client/Components/Profile_page.js';
 // import {LoginPage} from "./Client/Components/login.js"
+import { useState } from 'react';
 import HomePage from './pages/Mainpage.js';
+import {LoginPage} from './components/features/Loginpage.js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+
+function App(){
+  const [user, setUser] = useState(null);
+  return(
   <React.StrictMode>
-    <HomePage />
-  </React.StrictMode>
+    {user ? <HomePage /> : <LoginPage setUser={setUser}/>}
+  </React.StrictMode>);
+}
+
+root.render(
+  <App />
 );
 
 // If you want to start measuring performance in your app, pass a function

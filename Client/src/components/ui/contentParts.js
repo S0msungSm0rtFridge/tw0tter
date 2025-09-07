@@ -4,7 +4,8 @@ import { getPosts, getUsers } from '../../asyncHelpers';
 
 //main content area of homepage, is the miiddle bar when logging on tiwtter
 function MainContent({setWindowState}){
-
+    const [newPostCont, setNewPostCont] = useState(null);
+    const [submit, setsubmit] = useState(false);
     const [posts, setPost] = useState([]); //list of all posts
 
     useEffect(() => {
@@ -16,6 +17,15 @@ function MainContent({setWindowState}){
         setWindowState(["post", postID]);
     }, [setWindowState]);
 
+    const handleSubmitPost = useCallback(() => {
+        setsubmit(true);
+        if (!newPostCont){
+            return; 
+        } 
+        
+
+    });
+
     return ( 
         <div className = "main-content-items">
             <div className = "cain-content--nav--bar">
@@ -23,9 +33,12 @@ function MainContent({setWindowState}){
                 <button>Following</button>
             </div>
             <div className = "post-creation-area">
-                <textarea placeholder = "What's happening?"></textarea>
+                <textarea value={newPostCont} onChange={(e) => {setNewPostCont(e.target.value)}} placeholder = "What's happening?"></textarea>
                 {/*add biuttons to add photos, links giffs and shit */}
-                <button>Post</button>
+                <div>
+                    {submit && !newPostCont ? <div>post content cannot be empty</div>: <div></div>}
+                    <button>Post</button>
+                </div>
             </div>
             <div className = "content-area" onClick = { () => console.log("pressed a post")}>
                 <div>{posts.map(post => {return <PostBox //call of postBox to display every post

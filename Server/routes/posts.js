@@ -93,7 +93,6 @@ router.post('/updateView/:postID', (req, resp) => { //update views in the databa
     });
 });
 
-
 // get post with searched keywords
 router.get("/search", (req, res) => {
     const search = req.query.search;
