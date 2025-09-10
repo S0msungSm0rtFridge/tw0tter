@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 
 // import {ProfilePage, FollowPage, EditProfile} from './Client/Components/Profile_page.js';
@@ -12,18 +12,28 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 function App(){
   const [user, setUser] = useState(null);
-  return(
-  <React.StrictMode>
-    <Router>
-      {/* ADD A AUTHENTICAITION CHECKER BEFORE REOUTES AND ADD AUTHNETICATION ROUTE change home from * to /home/* after auth  page is made */}
-      <Routes>
-          <Route path = "/*" element={< HomePage/>}/>
-      </Routes>
-    </Router>
-  </React.StrictMode>
-);
+  console.log("USER IS", user);
+  return (
+    <React.StrictMode>
+      <Router>
+        {/* ADD A AUTHENTICAITION CHECKER BEFORE REOUTES AND ADD AUTHNETICATION ROUTE change home from * to /home/* after auth  page is made */}
+        <Routes>
+          {/* Auth route */}
+          <Route path="/auth" element={<LoginPage setUser={setUser} />} />
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();
+          {/* Protected app route */}
+          <Route path="/home/*" element={
+            user ? <HomePage /> : <Navigate to="/auth" replace />
+          } />
+
+          {/* Default redirect based on auth */}
+          <Route path="/*" element={<Navigate to={user ? '/home' : '/auth'} replace />} />
+        </Routes>
+      </Router>
+    </React.StrictMode>
+  );
+}
+
+root.render(
+  <App />
+);

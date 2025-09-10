@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const database = require("../db.js");
+const { hashPassword, verifyPassword } = require("../utils/passwordUtils");
 
 router.get('/', (req, resp) => { //grab all users
     database.query('SELECT * FROM users', (err, res) => {
@@ -49,7 +50,7 @@ router.post('/follow', (req, res) => {
 
     const sql = "INSERT INTO follows (followerID, followingID) VALUES (?, ?)"
 
-    document.query(sql, [followerID, followingID], (err) => {
+    database.query(sql, [followerID, followingID], (err) => {
         if(err){
             return res.status(500).json({err: err.message});
         }
@@ -64,7 +65,7 @@ router.post('/unfollow', (req, res) => {
 
     const sql = "DELETE FROM follows WHERE followerID = ? AND followingID = ?"
 
-    document.query(sql, [followerID, followingID], (err) => {
+    database.query(sql, [followerID, followingID], (err) => {
         if(err){
             return res.status(500).json({err: err.message});
         }
@@ -98,4 +99,109 @@ router.get("/search", (req, res) => {
         res.json(results);
     });
 });
+// Register a new user
+router.post('/register', async (req, res) => {
+    try {
+        const { username, displayName, password, bio, joinedDate, birthDate } = req.body;
+        console.log(username, displayName, password, bio, joinedDate, birthDate);
+        // Validate required fields
+        if (!username || !displayName || !password || !joinedDate || !birthDate) {
+            return res.status(400).json({ error: "Username, display name, and password are required" });
+        }
+        // Check if username already exists                                               
+        const existingUser = await new Promise((resolve, reject) => {
+            database.query('SELECT userID FROM users WHERE username = ?', [username], (err, result) => {
+                if (err){
+                    reject(err);
+                } 
+                else{
+                    resolve(result);
+                } 
+            });
+        });
+
+        if (existingUser.length > 0) {
+            return res.status(409).json({ error: "Username already exists" });
+        }
+        // Hash the password
+        const hashedPassword = await hashPassword(password);
+        
+        // Insert new user
+        const sql = 'INSERT INTO users (objectTag, username, displayName, pass, bio) VALUES (?, ?, ?, ?, ?)';
+        const values = ['u', username, displayName, hashedPassword, bio || 'No Biography', joinedDate, birthDate];
+       
+        database.query(sql, values, (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({ error: err.message });
+            }
+            
+            // Return user info (without password)
+            res.status(201).json({
+                message: "User created successfully",
+                user: {
+                    userID: result.insertId,
+                    username,
+                    displayName,
+                    bio: bio || '',
+                    joinedDate,
+                    birthDate
+                }
+            });
+        });
+
+    } catch (error) {
+        console.error('Registration error:', error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+// Login user
+router.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        // Validate required fields
+        if (!username || !password) {
+            return res.status(400).json({ error: "Username and password are required" });
+        }
+
+        const userResult = await new Promise((resolve, reject) => { //promise to query for the matching username
+            database.query('SELECT * FROM users WHERE username = ?', [username], (err, res) => {
+                if (err){
+                    reject(err);
+                }
+                else{
+                    resolve(res);
+                }
+            });
+        });
+
+        console.log(userResult);
+
+        if (userResult.length === 0){
+            return res.status(401).json({ error: "Invalid username or password"});
+        }
+
+        const user = userResult[0]; // Get the first (and only) user from the array
+        const passcheck = await verifyPassword(password, user.pass); // Fix parameter order
+        if (!passcheck){ //check if the password to login is correct
+            return res.status(401).json({ error: "Invalid username or password" });
+        }
+
+        return res.status(200).json({ //return the user without the password
+            message: 'Login Successful',
+            user: {
+                userID: user.userID,
+                username: user.username,
+                displayName: user.displayName,
+                bio: user.bio || '',
+            }
+        });
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 module.exports = router;

@@ -1,7 +1,90 @@
 import '../StyleSheets/Postpage.css';
 import { useState, useEffect, useCallback } from 'react';
-import { getPostByID, getUserByID } from '../asyncHelpers';
+import { getPostByID, getUserByID,getChildrenPosts, updatePostViews } from '../asyncHelpers';
 import { useNavigate, useLocation, useParams  } from "react-router-dom";
+import { FormatDateTime } from '../components/features/helper';
+
+function Replies({post}){
+    const navigate = useNavigate();
+    const [replies, setReplies] = useState([]);
+    const [replyUsersById, setReplyUsersById] = useState({});
+
+    useEffect(() => {
+        getChildrenPosts(post.postID)
+            .then((data) => setReplies(data))
+            .catch((error) => console.error(error));
+    }, [post])
+
+    useEffect(() => {
+        if (!replies || replies.length === 0) {
+            setReplyUsersById({});
+            return;
+        }
+
+        const uniqueUserIds = Array.from(new Set(replies.map((r) => r.postBy)));
+
+        Promise.all(
+            uniqueUserIds.map((userId) =>
+                getUserByID(userId)
+                    .then((user) => [userId, user])
+                    .catch(() => [userId, null])
+            )
+        )
+            .then((entries) => {
+                setReplyUsersById(Object.fromEntries(entries));
+            })
+            .catch((error) => console.error(error));
+    }, [replies]);
+
+    const handleClickReply = useCallback((replyID) => {
+        console.log("goes here", replyID);
+        navigate(`/home/post/${replyID}`);
+        console.log("afterpost");
+    }, [navigate]);
+
+    return(
+        <div className="replies-container">
+            {replies.map((reply) => {
+                const replyUser = replyUsersById[reply.postBy];
+                return (
+                    <div key={reply.postID} className="reply-item" onClick={() => {handleClickReply(reply.postID); updatePostViews(reply.postID)}}>
+                        <div className="reply-avatar">
+                            <div className="avatar-circle">
+                                <img src={replyUser?.avatar}></img>
+                            </div>
+                        </div>
+                        <div className="reply-content">
+                            <div className="reply-header">
+                                <span className="reply-display-name">{replyUser?.displayName}</span>
+                                <span className="reply-username">@{replyUser?.username}</span>
+                                <span className="reply-time">· {<FormatDateTime datetime={reply.postDate}/>}</span>
+                            </div>
+                            <div className="reply-text">{reply.content}</div>
+                            <div className="reply-actions">
+                                <button className="reply-action-btn">
+                                    <span className="reply-icon">💬{reply.numReplies}</span>
+                                </button>
+                                <button className="reply-action-btn">
+                                    <span className="retweet-icon">🔄{reply.numRetweet}</span>
+                                </button>
+                                <button className="reply-action-btn">
+                                    <span className="like-icon">❤️{reply.numLikes}</span>
+                                </button>
+                                <button className="reply-action-btn">
+                                    <span className="like-icon">👁️{reply.views}</span>
+                                </button>
+                                <button className="reply-action-btn">
+                                    <span className="share-icon">📤</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    );
+}
+
 
 function PostPage(){ //page afte ryou click a post
 
@@ -33,7 +116,7 @@ function PostPage(){ //page afte ryou click a post
     }, [navigate]);    
 
     if (!user || !post){return(<div>Loading...</div>)} //make sure post and user has been grabbed
-    // console.log(user);
+    console.log(post, user);
     return(
         <div className="post-page-view">
             <div className="post-header">
@@ -125,10 +208,7 @@ function PostPage(){ //page afte ryou click a post
                 
                 <div className="replies-section">
                     <Replies
-                        setWindowState={setWindowState} 
-                        windowState={windowState} 
                         post={post}
-                        users={users}
                     />
                 </div>
             </div>

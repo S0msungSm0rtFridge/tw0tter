@@ -192,4 +192,28 @@ async function getNumLikeReply(replyID){ //also useless now. //if useless y not 
     }
 }
 
-export { getUsers, getCommunities, getUserByID, getPosts, getPostByID, getReplies, getFollowers, getFollowing, getMembers, getWhoLikePost, getWhoLikeReply, getNumLikePost, getNumLikeReply, getWhoRetweet, getNumRetweet};
+async function signUp(username, displayName, password, bio, joinedDate, birthDate){
+    try {
+        console.log(bio);
+        const resp = await axios.post('/api/users/register', {username, displayName, password, bio, joinedDate, birthDate});
+        return resp.data.user;
+    }
+    catch (error){
+        console.error("Failed at signing a user up", error);
+        throw error;
+    }
+}
+
+async function signIn(username, password){
+    try {
+        const resp = await axios.post('/api/users/login', {username, password});
+        console.log(resp.data.user);
+        return resp.data.user;
+    }
+    catch (error){
+        console.error("Failed at logging in", error);
+        throw error;
+    }
+}
+
+export { getUsers, getCommunities, getUserByID, getPosts, getPostByID, updatePostViews, getChildrenPosts, getReplies, getFollowers, getFollowing, getMembers, getWhoLikePost, getWhoLikeReply, getNumLikePost, getNumLikeReply, getWhoRetweet, getNumRetweet, signUp, signIn};

@@ -1,7 +1,7 @@
-INSERT INTO users (username, objectTag, displayName, bio, numFollower, numFollowing, avatar) VALUES
-('elonmusk', 'u', 'Elon Musk', 'Mars, Cars, Chips, Starships. Tweets are my own.', 2, 1, 'https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png'),
-('catlady13', 'u', 'Cat Lady', 'All things cats. Cat memes, cat facts, cat pics.', 1, 2,'https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png'),
-('historybuff', 'u', 'History Buff', 'History is written by the victors.', 1, 1,'https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png');
+INSERT INTO users (username, objectTag, displayName, pass, bio, numFollower, numFollowing, avatar, joined, birthDate) VALUES
+('elonmusk', 'u', 'Elon Musk', 'password','Mars, Cars, Chips, Starships. Tweets are my own.', 2, 1, 'https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png', '1972-07-29','1971-06-28'),
+('catlady13', 'u', 'Cat Lady', 'password', 'All things cats. Cat memes, cat facts, cat pics.', 1, 2,'https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png', '1994-05-13','1993-04-12'),
+('historybuff', 'u', 'History Buff', 'password', 'History is written by the victors.', 1, 1,'https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png', '1988-11-06','1987-10-05');
 
 INSERT INTO follows (followerID, followingID) VALUES
 (1, 2), -- elonmusk follows catlady13

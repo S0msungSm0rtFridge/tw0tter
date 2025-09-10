@@ -2,7 +2,7 @@ import '../../StyleSheets/LoginPage.css';
 import { SignUpPage, SignInPage } from '../ui/SignUpPage';
 import { useState } from 'react';
 //basic login page, lacks any auth and is not funvctional current;ly
-function LoginPage(setUser){
+function LoginPage({setUser}){
 
     const [SigningIn, setSigningIn] = useState(false);
     const [SigningUp, setSigningUp] = useState(false);
@@ -10,8 +10,8 @@ function LoginPage(setUser){
     return (
 
         <div className = "login-page-main-container">
-            {SigningUp && <SignUpPage setSigningUp={setSigningUp}/>}
-            {SigningIn && <SignInPage setSigningIn={setSigningIn}/>}
+            {SigningUp && <SignUpPage setSigningUp={setSigningUp} setUser={setUser}/>}
+            {SigningIn && <SignInPage setSigningIn={setSigningIn} setUser={setUser}/>}
             <div className = "login-page-left-side-logo"></div>
             <div className = "login-page-right-side-content">
                 <h1 className = "login-page-main-header">Happening Now</h1>

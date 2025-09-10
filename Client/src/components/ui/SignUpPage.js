@@ -1,16 +1,19 @@
 import '../../StyleSheets/SignupPage.css'
 
 import { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { signIn, signUp } from '../../asyncHelpers';
 //this page will display when someone hits create account
-function SignUpPage({setSigningUp}){
+function SignUpPage({setSigningUp, setUser}){
 
+    const navigate = useNavigate();
     const nameRef = useRef(null);
     const displayRef = useRef(null);
-    const phoneRef = useRef(null);
+    const passRef = useRef(null);
     const monthRef = useRef(null);
     const dayRef = useRef(null);
     const yearRef = useRef(null);
-
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [daysInMonth, setDaysInMonth] = useState(31);
 
@@ -25,22 +28,22 @@ function SignUpPage({setSigningUp}){
     };
 
     const validateArgs = () => {
-        if(!monthRef.current || !dayRef.current || !yearRef.current || !nameRef.current || !phoneRef.current){ 
+        if(!monthRef.current.value || !dayRef.current.value || !yearRef.current.value || !nameRef.current.value || !passRef.current.value || !displayRef.current.value){ 
             alert("Please fill out all fields")
             return false;
         }
         const name = nameRef.current.value;
-        const phone = phoneRef.current.value;
+        const password = passRef.current.value;
         const month = monthRef.current.value;
         const day = dayRef.current.value;
         const year = yearRef.current.value;
-        if(!/^\d+$/.test(phone)){
-            alert("Please enter a valid phone number")
-            return false;
-        }
+        // if(!/^\d+$/.test(phone)){
+        //     alert("Please enter a valid phone number")
+        //     return false;
+        // }
         const dob = new Date(year, month - 1, day);
         const today = new Date();
-        const age = today.getFullYear() - dob.getFullYear();
+        var age = today.getFullYear() - dob.getFullYear();
         const m = today.getMonth() - dob.getMonth();
         if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
             age--;
@@ -52,6 +55,28 @@ function SignUpPage({setSigningUp}){
         return true;
     }
 
+    const handleSignUp = async () => {
+        if (!validateArgs()) return;
+        const username = nameRef.current.value;
+        const displayName = displayRef.current?.value || '';
+        const password = passRef.current.value;
+        setIsSubmitting(true);
+        try {
+            const user = await signUp(username, displayName, password, '', new Date(yearRef.current.value, monthRef.current.value, dayRef.current.value), new Date());
+            console.log("gets here", user);
+            if (user) {
+                setUser(user);
+                setSigningUp(false);
+                navigate('/home');
+            }
+        } catch (error) {
+            alert('Sign up failed. Please try again.');
+            console.error(error);
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
+
     return(
         <div className = "Sign-up-page-main-container">
             <div className = "Sign-up-page-header-options">
@@ -60,7 +85,8 @@ function SignUpPage({setSigningUp}){
             </div>
             <div className = "sign-up-page-content-area">
                 <input className = "sign-up-page-name-input" placeholder="Name" maxLength={50} type="text" required ref = {nameRef}></input>
-                <input className = "sign-up-page-name-input" placeholder="Phone Number" type="Number" pattern="\d+" required ref = {phoneRef}></input>
+                <input className = "sign-up-page-name-input" placeholder="UserName" maxLength={50} type="text" required ref = {displayRef}></input>
+                <input className = "sign-up-page-name-input" placeholder="Password" type="text"  required ref = {passRef}></input>
                 <h3>Date Of Birth</h3>
                 <div className = "sign-up-page-date-of-borth-selectors">
                     <select ref={monthRef} onChange={updateDays}>
@@ -71,7 +97,7 @@ function SignUpPage({setSigningUp}){
                                 </option>
                                 ))}
                     </select>
-                    <select>
+                    <select ref={dayRef}>
                         <option value="" disabled selected>Day</option>
                             {[...Array(daysInMonth)].map((_, i) => (
                         <option key={i + 1} value={i + 1}>{i + 1}</option>
@@ -86,15 +112,17 @@ function SignUpPage({setSigningUp}){
                     </select>
                 </div>
             </div>
-            <button className = "sign-up-page-next-button" onClick={() => validateArgs()}>Next</button>
+            <button className = "sign-up-page-next-button" disabled={isSubmitting} onClick={handleSignUp}>{isSubmitting ? 'Submitting...' : 'Next'}</button>
         </div>
     )
 }
 
-function SignInPage({setSigningIn}){
+function SignInPage({setSigningIn, setUser}){
 
+    const navigate = useNavigate();
     const nameRef = useRef(null);
     const passwordRef = useRef(null);
+    const [Submitting, setSubmitting] = useState(false);
 
     const validateArgs = () => {
         const name = nameRef.current.value;
@@ -106,6 +134,31 @@ function SignInPage({setSigningIn}){
         return true;
     }
 
+    const handleSubmit = async () => {
+        if (!validateArgs()){
+            setSubmitting(false);
+            return;
+        }
+        const name = nameRef.current.value;
+        const password = passwordRef.current.value;
+        setSubmitting(true);
+        try{
+            const user = await signIn(name, password);
+            console.log(user);
+            if (user){
+                console.log("this runs");
+                setUser(user);        
+                setSigningIn(false);
+                navigate('/home');
+                return;
+            }
+        }
+        catch (error){
+            alert("Invalid username, or password");
+            console.error(error); 
+        }
+    }
+
     return (
         <div className = "Sign-up-page-main-container">
             <div className = "Sign-up-page-header-options">
@@ -113,11 +166,10 @@ function SignInPage({setSigningIn}){
                 <h2 className = "Sign-up-page-title">Sign Into Your Account</h2>
             </div>
             <div className = "sign-up-page-content-area">
-                <input className = "sign-up-page-name-input" placeholder="Name" maxLength={50} type="text" required ref = {nameRef}></input>
-                <input className= 'sign-up-page-name-input' placeholder="Display Name" maxLength={50} type="text" required ref = {displayRef}></input>
+                <input className = "sign-up-page-name-input" placeholder="UserName" maxLength={50} type="text" required ref = {nameRef}></input>
                 <input className = "sign-up-page-name-input" placeholder="Password" type="text" required ref = {passwordRef}></input>
             </div>
-            <button className = "sign-up-page-next-button" onClick = { () => {validateArgs()}}>Next</button>
+            <button className = "sign-up-page-next-button" onClick = {() => {handleSubmit();}}>{setSubmitting ? 'verifying' : 'Next'}</button>
         </div>
     )
 }

@@ -8,18 +8,20 @@ import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 function MainContent(){
 
     const navigate = useNavigate();
+    const [newPostCont, setNewPostCont] = useState(null);
+    const [submit, setsubmit] = useState(false);
     const [posts, setPost] = useState([]); //list of all posts
 
     useEffect(() => {
         getPosts().then((data) => setPost(data)).catch((error) => console.log(error));
     }, []);
 
-    useEffect(() => {
-        getUsers().then((data) => setUser(data)).catch((error) => console.log(error)); //make it so that it updates on a change to  database
-    }, []);
+    // useEffect(() => {
+    //     getUsers().then((data) => setUser(data)).catch((error) => console.log(error)); //make it so that it updates on a change to  database
+    // }, []);
 
     const handlePostclick = useCallback((postID) => {
-        navigate(`/post/${postID}`);
+        navigate(`post/${postID}`);
     }, [navigate]);
 
     return ( 
@@ -36,7 +38,7 @@ function MainContent(){
                     <button>Post</button>
                 </div>
             </div>
-            <div className = "content-area" onClick = { () => console.log("pressed a post")}>
+            <div className = "content-area">
                 <div>{posts.map(post => {return <PostBox //call of postBox to display every post
                 post={post} 
                 userID={post.postedBy}
